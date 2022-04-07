@@ -25,10 +25,27 @@ header > h1 {
 
 aside.sideBar {
   flex: 0.5;
-  height: 100px;
+  height: 120px;
   background-color: #E3BAA6;
   margin: 0 30px;
   border-radius: 8px;
+}
+
+.sideBar__content {
+  margin-left: 10px;
+}
+
+.sideBar__content > h2 {
+  margin: 10px 0;
+}
+
+.sideBar__content > a {
+  display: block;
+  width: 85%;
+  height: 25px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px 0;
 }
 
 section.burger {
