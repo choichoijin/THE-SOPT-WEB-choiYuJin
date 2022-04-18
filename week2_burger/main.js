@@ -6,7 +6,7 @@ const totalPrice = $('#cart__amount__total');
 const orderBtn = $('.cart__order');
 const cancelBtn = $('.cart__cancel');
 
-//취소하기 클릭
+//취소하기 버튼 클릭
 function cancelClick() {
   cancelBtn.addEventListener('click', (e) => {
     totalPrice.innerText = 0;
