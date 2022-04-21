@@ -8,7 +8,7 @@ button {
   background-color: transparent;
   border: none;
   border-radius: 8px;
-  background-color: #bc9bfd;
+  background-color: rgb(100, 100, 239);
   padding: 5px 10px;
   color: white;
 }
@@ -31,7 +31,7 @@ header {
   color: white;
   padding: 5px 10px;
   margin-bottom: 15px;
-  background-color: #8040ff;
+  background-color: rgb(244, 84, 84);
 }
 
 header > h1 {
@@ -53,8 +53,8 @@ section.scoreBoard {
   width: 100%;
   text-align: center;
 
-  color: white;
-  background-color: #bc9bfd;
+  color: black;
+  background-color: whitesmoke;
   padding: 10px;
 }
 
@@ -74,7 +74,7 @@ div.imageBoard > img {
   width: 100%;
   max-height: 100%;
   border-radius: 18px;
-  border: 1px solid #8040ff;
+  border: 1px solid rgb(100, 100, 239);
 }
 
 .modal.hide {
@@ -128,7 +128,8 @@ div.imageBoard > img {
   font-size: 14px;
   color: white;
 
-  background-color: #f88dd8;
+  background-color: whitesmoke;
+  color: black;
 
   list-style: none;
 }

@@ -1,8 +1,8 @@
-import pic1 from "./assets/김규민.jpeg";
-import pic2 from "./assets/전희선.jpeg";
-import pic3 from "./assets/서혜은.jpg";
-import pic4 from "./assets/황주희.jpeg";
-import pic5 from "./assets/백지연.png";
+import pic1 from "./assets/touslesjours.jpeg";
+import pic2 from "./assets/sibelhomme.jpeg";
+import pic3 from "./assets/moncher.jpeg";
+import pic4 from "./assets/enfant.jpeg";
+import pic5 from "./assets/monami.jpeg";
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -11,23 +11,23 @@ let currentStep;
 const quizList = [
   {
     src: pic1,
-    answer: "김규민",
+    answer: "매일매일",
   },
   {
     src: pic2,
-    answer: "전희선",
+    answer: "꽃미남",
   },
   {
     src: pic3,
-    answer: "서혜은",
+    answer: "내 친애하는 삼촌",
   },
   {
     src: pic4,
-    answer: "황주희",
+    answer: "어린이",
   },
   {
     src: pic5,
-    answer: "백지연",
+    answer: "내 친구",
   },
 ];
 
