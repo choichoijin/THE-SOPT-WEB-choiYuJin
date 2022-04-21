@@ -23,7 +23,6 @@ function order({burgerCard, cartList}) {
     //"선택한 버거"에서 원하는 정보 변수로 선언.
     const burgerName = selectedCard.children[1].firstElementChild;
     const burgerPrice = selectedCard.children[1].firstElementChild.nextElementSibling;
-   
     //카드가 아닌 부분 선택시 오류 생김. 
 
     //장바구니에 list 추가.
@@ -66,13 +65,14 @@ function order({burgerCard, cartList}) {
 
       for (let i = 0; i < nameList.length - 1; i++)
         if (burgerName.innerText === nameList[i].innerText){
+          nameList[i].parentElement.querySelector(".cart__list__number").value++;
           return true;
         }
       return false;
-      }
+    }
 
     addOrder(burgerName, burgerPrice);
-    if (checkCart(burgerName) !== false) {
+    if (checkCart(burgerName)) {
       cartList.lastElementChild.classList.add('hide')
     }
     
