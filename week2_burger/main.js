@@ -2,7 +2,7 @@ const $ = (selector) => document.querySelector(selector);
 
 const cartList = $('ul.cart__list');
 
-const totalAmount = $('#cart__amount__total');
+let totalAmount = $('#cart__amount__total');
 
 const orderBtn = $('.cart__order');
 const cancelBtn = $('.cart__cancel');
@@ -12,6 +12,17 @@ function cancelClick() {
   cancelBtn.addEventListener('click', (e) => {
     totalAmount.innerText = 0;
   })
+}
+
+//누적금액 계산
+function calcTotalAmount(cartList) {
+  let total = 0;
+  for (let i = 0; i < cartList.children.length; i++) {
+    let howMany = cartList.children[i].querySelector('.cart__list__number').value;
+    let howMuch = toNumber(cartList.children[i].querySelector('.cart__list__price').innerText);
+    total += howMany * howMuch;
+  }
+  totalAmount.innerText = total;
 }
 
 //장바구니에 추가.
@@ -38,6 +49,10 @@ function order({burgerCard, cartList}) {
       input.className = 'cart__list__number';
       input.type = "number";
       input.value = 1;
+      //장바구니 양 변경 시 감지 후 누적금액 계산.
+      input.addEventListener('input', (e) => {
+        calcTotalAmount(cartList);
+      })
 
       const div = document.createElement('div');
       div.className = 'cart__list__price';
@@ -48,6 +63,7 @@ function order({burgerCard, cartList}) {
       button.innerText = 'X';
       button.onclick = () => {
         burgerLi.remove();
+        calcTotalAmount(cartList);
       }
 
       burgerLi.appendChild(span);
@@ -56,6 +72,8 @@ function order({burgerCard, cartList}) {
       burgerLi.appendChild(button);
 
       cartList.appendChild(burgerLi);
+
+      calcTotalAmount(cartList);
       }
 
     //선택한 버거가 이미 카트에 있는지 확인.
@@ -73,8 +91,11 @@ function order({burgerCard, cartList}) {
 
     addOrder(burgerName, burgerPrice);
     if (checkCart(burgerName)) {
-      cartList.lastElementChild.classList.add('hide')
+      cartList.lastElementChild.remove();
+      calcTotalAmount(cartList);
     }
+
+  
     
 
     // if (checkCart(burgerName)) {
@@ -89,7 +110,7 @@ function order({burgerCard, cartList}) {
 
 
 
-function burgerPriceNumber(burgerPrice) {
+function toNumber(burgerPrice) {
 	const removedComma = burgerPrice.slice(0, -1).replace(/\D/g, "");
   return +removedComma;
 };
