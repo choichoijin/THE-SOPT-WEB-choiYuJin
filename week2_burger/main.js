@@ -5,12 +5,13 @@ let totalAmount = $('#cart__amount__total');
 const orderBtn = $('.cart__order');
 const cancelBtn = $('.cart__cancel');
 
-//주문하기 누르면 모달 보여주기, 아니요 누르면 모달 숨기기
+//주문하기 버튼 누르면 모달 보여주기.
 function orderClick() {
   orderBtn.addEventListener('click', (e) => {
     const modal = $('.modal')
     modal.classList.remove('hidden')
 
+    //아니요 누르면 모달 숨기기.
     const noBtn = $('.modal__button__no');
     console.log(noBtn);
     noBtn.addEventListener('click', (e) => {
@@ -20,10 +21,10 @@ function orderClick() {
   })
 }
 
-//취소하기 버튼 클릭
-function cancelClick({cartList}) {
+//취소하기 버튼 클릭하면 장바구니 비우기.
+function cancelClick() {
   cancelBtn.addEventListener('click', (e) => {
-    //.cart__list__list class 가진 요소 모두 제거. 장바구니 목록 비우기. 
+    //.cart__list__list class 가진 요소 모두 제거.
     const lists = document.querySelectorAll('.cart__list__list')
     lists.forEach(function(list){
       list.remove();
@@ -52,31 +53,33 @@ function order({burgerCard, cartList}) {
     //"선택한 버거"에서 원하는 정보 변수로 선언.
     const burgerName = selectedCard.children[1].firstElementChild;
     const burgerPrice = selectedCard.children[1].firstElementChild.nextElementSibling;
-    //카드가 아닌 부분 선택시 오류 생김. 
 
     //장바구니에 list 추가.
     function addOrder(burgerName, burgerPrice) {
       const burgerLi = document.createElement('li');
       burgerLi.className = 'cart__list__list';
 
+      //장바구니 list 내 버거 이름.
       const span = document.createElement('span');
       span.className = 'cart__list__name';
       span.innerText = burgerName.innerText;
 
+      //장바구니 list 내 버거 개수.
       const input = document.createElement('input');
       input.className = 'cart__list__number';
       input.type = "number";
       input.value = 1;
-      //장바구니 양 변경 시 감지 후 누적금액 계산.
+      //장바구니 양 변경 감지 후 누적금액 계산.
       input.addEventListener('input', (e) => {
         calcTotalAmount(cartList);
       })
 
+      //장바구니 list 내 버거 가격.
       const div = document.createElement('div');
       div.className = 'cart__list__price';
       div.innerText = burgerPrice.innerText;
 
-      //취소 버튼
+      //장바구니 list 내 취소 버튼
       const button = document.createElement('button');
       button.innerText = 'X';
       button.onclick = () => {
@@ -84,10 +87,10 @@ function order({burgerCard, cartList}) {
         calcTotalAmount(cartList);
       }
 
-      burgerLi.appendChild(span);
-      burgerLi.appendChild(input);
-      burgerLi.appendChild(div);
-      burgerLi.appendChild(button);
+      const addList = [span, input, div, button];
+      addList.forEach(function(tag){
+        burgerLi.appendChild(tag);
+      })
 
       cartList.appendChild(burgerLi);
 
@@ -126,8 +129,6 @@ function order({burgerCard, cartList}) {
 
   }
 
-
-
 function toNumber(burgerPrice) {
 	const removedComma = burgerPrice.slice(0, -1).replace(/\D/g, "");
   return +removedComma;
@@ -135,7 +136,7 @@ function toNumber(burgerPrice) {
 
 function cartManager(burgerInfo) {
   order(burgerInfo);
-  cancelClick(burgerInfo);
+  cancelClick();
   orderClick();
 }
 
