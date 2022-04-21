@@ -1,15 +1,15 @@
 const $ = (selector) => document.querySelector(selector);
 
-const cartList = $('ul.cart__list');
-
 let totalAmount = $('#cart__amount__total');
 
 const orderBtn = $('.cart__order');
 const cancelBtn = $('.cart__cancel');
 
 //취소하기 버튼 클릭
-function cancelClick() {
+function cancelClick({cartList}) {
   cancelBtn.addEventListener('click', (e) => {
+    //왜 child.remove();는 안딜까?
+    cartList.remove();
     totalAmount.innerText = 0;
   })
 }
@@ -117,6 +117,7 @@ function toNumber(burgerPrice) {
 
 function cartManager(burgerInfo) {
   order(burgerInfo);
+  cancelClick(burgerInfo);
 }
 
 window.onload = () => {
