@@ -91,6 +91,11 @@ function attachEvent({score, answer, image}) {
       }
     }
   });
+  //다시하기 버튼 기능.
+  const buttonRestart = $('.buttonList__restart')
+  buttonRestart.addEventListener('click', (e) => {
+  initGame({score, answer, image})
+  })
 }
 
 function gameManager(gameInfo) {
@@ -106,4 +111,3 @@ window.onload = () => {
     image: $('.imageBoard > img'),
   });
 }
-
