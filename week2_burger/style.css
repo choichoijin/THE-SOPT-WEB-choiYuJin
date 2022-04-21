@@ -163,17 +163,19 @@ div.cart__buttonContainer {
   margin-top: 20px;
 }
 
-.modal__button > a {
+.modal__button > a{
+  background-color: rgb(58, 190, 238);
+}
+
+.modal__button > button{
+  border: 0;
+  outline: 0;
+  background-color:#e43656;
+}
+
+.modal__button > a, button{
   margin: 0 15px;
   padding: 7px 10px;
   border-radius: 30px;
   color: white;
-}
-
-.modal__button > a:first-of-type{
-  background-color: rgb(58, 190, 238);
-}
-
-.modal__button > a:last-of-type{
-  background-color:#e43656;
 }
