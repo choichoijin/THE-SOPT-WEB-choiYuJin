@@ -90,13 +90,44 @@ div.burger__content {
 
 aside.cart {
   flex: 1;
-  height: 270px;
+  height: 100%;
   width: 300px;
   background-color: bisque;
   margin: 0 10px;
   border-radius: 8px;
   position: sticky;
   top: 50px;
+}
+
+.cart__list__list {
+  list-style: none;
+  display: flex;
+  margin: 15px 0;
+  justify-content: space-between;
+}
+
+.cart__list__name {
+  flex: 50%
+}
+
+.cart__list__number {
+  width: 33px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.cart__list__price {
+  flex: 25%
+}
+
+.cart__list__list > button {
+  flex: 25px;
+  height: 25px;
+  border: 0;
+  outline: 0;
+  border-radius: 50px;
+  color: white;
+  background-color:#e43656;
 }
 
 div.cart__content {
@@ -115,7 +146,8 @@ div.cart__amount > h2, h4 {
   margin: 30px 0;
 }
 
-div.cart__line {
+hr {
+  border: none;
   height: 2px;
   background-color: white;
 }
