@@ -138,3 +138,42 @@ div.cart__buttonContainer {
 .hide {
   display: none;
 }
+
+.modal {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 110px;
+  border-radius: 30px;
+  background-color:beige;
+}
+
+.modal__content > p{
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.modal__button{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.modal__button > a {
+  margin: 0 15px;
+  padding: 7px 10px;
+  border-radius: 30px;
+  color: white;
+}
+
+.modal__button > a:first-of-type{
+  background-color: rgb(58, 190, 238);
+}
+
+.modal__button > a:last-of-type{
+  background-color:#e43656;
+}
