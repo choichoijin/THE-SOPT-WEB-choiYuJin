@@ -5,11 +5,22 @@ let totalAmount = $('#cart__amount__total');
 const orderBtn = $('.cart__order');
 const cancelBtn = $('.cart__cancel');
 
+//주문하기 버튼 클릭
+function orderClick() {
+  orderBtn.addEventListener('click', (e) => {
+    const modal = $('.modal')
+    modal.classList.remove('hide')
+  })
+}
+
 //취소하기 버튼 클릭
 function cancelClick({cartList}) {
   cancelBtn.addEventListener('click', (e) => {
-    //왜 child.remove();는 안딜까?
-    cartList.remove();
+    //.cart__list__list class 가진 요소 모두 제거. 장바구니 목록 비우기. 
+    const lists = document.querySelectorAll('.cart__list__list')
+    lists.forEach(function(list){
+      list.remove();
+    })
     totalAmount.innerText = 0;
   })
 }

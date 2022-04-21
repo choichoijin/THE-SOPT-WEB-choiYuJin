@@ -135,7 +135,7 @@ div.cart__buttonContainer {
   justify-content: center;
 }
 
-.hide {
+.modal.hidden {
   display: none;
 }
 
@@ -173,7 +173,8 @@ div.cart__buttonContainer {
   background-color:#e43656;
 }
 
-.modal__button > a, button{
+.modal__button > a, 
+.modal__button > button{
   margin: 0 15px;
   padding: 7px 10px;
   border-radius: 30px;
