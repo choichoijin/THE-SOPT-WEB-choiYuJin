@@ -163,18 +163,19 @@ div.cart__buttonContainer {
   margin-top: 20px;
 }
 
-.modal__button > a{
+.modal__button__yes{
   background-color: rgb(58, 190, 238);
+  text-decoration: none;
 }
 
-.modal__button > button{
+.modal__button__no{
   border: 0;
   outline: 0;
   background-color:#e43656;
 }
 
-.modal__button > a, 
-.modal__button > button{
+.modal__button__yes, 
+.modal__button__no{
   margin: 0 15px;
   padding: 7px 10px;
   border-radius: 30px;

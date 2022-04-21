@@ -5,11 +5,18 @@ let totalAmount = $('#cart__amount__total');
 const orderBtn = $('.cart__order');
 const cancelBtn = $('.cart__cancel');
 
-//주문하기 버튼 클릭
+//주문하기 누르면 모달 보여주기, 아니요 누르면 모달 숨기기
 function orderClick() {
   orderBtn.addEventListener('click', (e) => {
     const modal = $('.modal')
-    modal.classList.remove('hide')
+    modal.classList.remove('hidden')
+
+    const noBtn = $('.modal__button__no');
+    console.log(noBtn);
+    noBtn.addEventListener('click', (e) => {
+    modal.classList.add('hidden');
+  })
+    
   })
 }
 
@@ -129,6 +136,7 @@ function toNumber(burgerPrice) {
 function cartManager(burgerInfo) {
   order(burgerInfo);
   cancelClick(burgerInfo);
+  orderClick();
 }
 
 window.onload = () => {
