@@ -135,3 +135,6 @@ div.cart__buttonContainer {
   justify-content: center;
 }
 
+.hide {
+  display: none;
+}
