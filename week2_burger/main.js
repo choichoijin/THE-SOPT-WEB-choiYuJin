@@ -102,7 +102,7 @@ function order({burgerCard, cartList}) {
       //현재 카트에 있는 리스트 변수 선언. htmlcollection(유사배열)
       const nameList = document.getElementsByClassName("cart__list__name");
 
-      for (let i = 0; i < nameList.length - 1; i++)
+      for (let i = 0; i < nameList.length; i++)
         if (burgerName.innerText === nameList[i].innerText){
           nameList[i].parentElement.querySelector(".cart__list__number").value++;
           return true;
@@ -110,10 +110,11 @@ function order({burgerCard, cartList}) {
       return false;
     }
 
-    addOrder(burgerName, burgerPrice);
     if (checkCart(burgerName)) {
-      cartList.lastElementChild.remove();
       calcTotalAmount(cartList);
+    }
+    else {
+      addOrder(burgerName, burgerPrice);
     }
 
   
