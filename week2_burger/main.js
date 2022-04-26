@@ -94,7 +94,6 @@ function order({burgerCard, cartList}) {
 
       cartList.appendChild(burgerLi);
 
-      calcTotalAmount(cartList);
       }
 
     //선택한 버거가 이미 카트에 있는지 확인.
@@ -110,12 +109,10 @@ function order({burgerCard, cartList}) {
       return false;
     }
 
-    if (checkCart(burgerName)) {
-      calcTotalAmount(cartList);
-    }
-    else {
+    if (checkCart(burgerName) === false) {
       addOrder(burgerName, burgerPrice);
     }
+    calcTotalAmount(cartList);
 
   
     
