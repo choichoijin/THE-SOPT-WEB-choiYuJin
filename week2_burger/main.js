@@ -7,13 +7,11 @@ const cancelBtn = $('.cart__cancel');
 
 //주문하기 버튼 누르면 모달 보여주기.
 function orderClick() {
+  const modal = $('.modal')
+  const noBtn = $('.modal__button__no');
   orderBtn.addEventListener('click', (e) => {
-    const modal = $('.modal')
     modal.classList.remove('hidden')
-
     //아니요 누르면 모달 숨기기.
-    const noBtn = $('.modal__button__no');
-    console.log(noBtn);
     noBtn.addEventListener('click', (e) => {
     modal.classList.add('hidden');
   })
@@ -37,8 +35,8 @@ function cancelClick() {
 function calcTotalAmount(cartList) {
   let total = 0;
   for (let i = 0; i < cartList.children.length; i++) {
-    let howMany = cartList.children[i].querySelector('.cart__list__number').value;
-    let howMuch = toNumber(cartList.children[i].querySelector('.cart__list__price').innerText);
+    const howMany = cartList.children[i].querySelector('.cart__list__number').value;
+    const howMuch = toNumber(cartList.children[i].querySelector('.cart__list__price').innerText);
     total += howMany * howMuch;
   }
   totalAmount.innerText = total;
@@ -47,15 +45,17 @@ function calcTotalAmount(cartList) {
 //장바구니에 추가.
 function order({burgerCard, cartList}) {
   burgerCard.addEventListener('click', (e) => {
+
     //"선택된 "버거 카드.
+    e.target.closest('.burger__card')
     const selectedCard = e.target.closest('.burger__card');
 
-    //"선택한 버거"에서 원하는 정보 변수로 선언.
-    const burgerName = selectedCard.children[1].firstElementChild;
-    const burgerPrice = selectedCard.children[1].firstElementChild.nextElementSibling;
+    if (selectedCard != null) {  
+      const burgerName = selectedCard.children[1].firstElementChild;
+      const burgerPrice = selectedCard.children[1].firstElementChild.nextElementSibling;
 
-    //장바구니에 list 추가.
-    function addOrder(burgerName, burgerPrice) {
+       //장바구니에 list 추가.
+      function addOrder(burgerName, burgerPrice) {
       const burgerLi = document.createElement('li');
       burgerLi.className = 'cart__list__list';
 
@@ -94,36 +94,28 @@ function order({burgerCard, cartList}) {
 
       cartList.appendChild(burgerLi);
 
+        }
+
+      function checkCart(burgerName) {
+      //현재 카트에 있는 리스트 변수 선언. htmlcollection(유사배열)
+        const nameList = document.getElementsByClassName("cart__list__name");
+  
+        for (let i = 0; i < nameList.length; i++)
+          if (burgerName.innerText === nameList[i].innerText){
+            nameList[i].parentElement.querySelector(".cart__list__number").value++;
+            return true;
+          }
+        return false;
       }
 
     //선택한 버거가 이미 카트에 있는지 확인.
-    function checkCart(burgerName) {
-      //현재 카트에 있는 리스트 변수 선언. htmlcollection(유사배열)
-      const nameList = document.getElementsByClassName("cart__list__name");
-
-      for (let i = 0; i < nameList.length; i++)
-        if (burgerName.innerText === nameList[i].innerText){
-          nameList[i].parentElement.querySelector(".cart__list__number").value++;
-          return true;
+        if (checkCart(burgerName) === false) {
+          addOrder(burgerName, burgerPrice);
+          }
+        calcTotalAmount(cartList);
         }
-      return false;
-    }
-
-    if (checkCart(burgerName) === false) {
-      addOrder(burgerName, burgerPrice);
-    }
-    calcTotalAmount(cartList);
-
   
-    
-
-    // if (checkCart(burgerName)) {
-    //   burgerLi.parentElement.remove();
-
-    // }
-
-  
-    })
+      });
 
   }
 
