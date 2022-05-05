@@ -58,8 +58,8 @@ function App() {
       setWinners([]);
       // 최종 우승자 나옴. 
     } else if (fighters.length === 2 && winners.length === 0) {
-      setFighters([fighters[0]]);
       onFight = false;
+      setFighters([fighters[0]]);
       // 경기중.
       } else {
     setFighters(fighters.slice(2));
@@ -74,7 +74,6 @@ function App() {
         } else if (fighters.length === 2 && winners.length === 0) {
           onFight = false;
           setFighters([fighters[1]]);
-          console.log(onFight);
         } else {
           setFighters(fighters.slice(2));
           setWinners([...winners, fighters[1]]);
@@ -88,8 +87,8 @@ function App() {
       <Title>🍨 배스킨라빈스31 메뉴 이상형 월드컵 🍨</Title>
       <Round>{winners.length + 1} / {}</Round>
       <Container>
-        {onFight ? <Left src={fighters[0].img} onClick={leftWin} /> : null}
-        {onFight ? <Right src={fighters[1].img} onClick={rightWin}/> : null}
+        {onFight && <Left src={fighters[0].img} onClick={leftWin} />}
+        {onFight && <Right src={fighters[1].img} onClick={rightWin}/>}
       </Container>
     </>
   );
