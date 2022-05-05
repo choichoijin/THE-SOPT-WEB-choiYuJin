@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import styled from 'styled-components';
 import './App.css';
 import pic1 from "./img/민트초콜릿칩.png";
@@ -45,18 +45,23 @@ const gameInfo = [
   },
 ]
 
+let onFight = true;
+
 function App() {
   const [fighters, setFighters] = useState(gameInfo);
   const [winners, setWinners] = useState([]);
 
   const leftWin = () => {
+    // 라운드 종료. 
     if (fighters.length === 2 && winners.length >= 1) {
-      console.log('round is over');
       setFighters([...winners, fighters[0]]);
       setWinners([]);
+      // 최종 우승자 나옴. 
     } else if (fighters.length === 2 && winners.length === 0) {
-      console.log('최종우승 나옴');
-    } else {
+      setFighters([fighters[0]]);
+      onFight = false;
+      // 경기중.
+      } else {
     setFighters(fighters.slice(2));
     setWinners([...winners, fighters[0]]);
     }
@@ -64,24 +69,27 @@ function App() {
 
   const rightWin = () => {
     if (fighters.length === 2 && winners.length >= 1) {
-          console.log('round is over');
           setFighters([...winners, fighters[1]]);
           setWinners([]);
         } else if (fighters.length === 2 && winners.length === 0) {
-          console.log('최종우승 나옴');
+          onFight = false;
+          setFighters([fighters[1]]);
+          console.log(onFight);
         } else {
           setFighters(fighters.slice(2));
           setWinners([...winners, fighters[1]]);
         }
   }
 
+
+
   return (
     <>
       <Title>🍨 배스킨라빈스31 메뉴 이상형 월드컵 🍨</Title>
       <Round>{winners.length + 1} / {}</Round>
       <Container>
-        {leftWin && <Left src={fighters[0].img} onClick={leftWin} />}
-        {rightWin && <Right src={fighters[1].img} onClick={rightWin}/>}
+        {onFight ? <Left src={fighters[0].img} onClick={leftWin} /> : null}
+        {onFight ? <Right src={fighters[1].img} onClick={rightWin}/> : null}
       </Container>
     </>
   );
