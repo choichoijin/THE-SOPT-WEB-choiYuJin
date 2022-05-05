@@ -14,27 +14,27 @@ import congrats from "./img/congrats.png";
 const gameInfo = [
   {
     img: pic1,
-    name: '민트초콜릿칩',
+    name: '민트 초콜릿 칩',
   },
   {
     img: pic2,
-    name: '오레오쿠키앤크림',
+    name: '오레오 쿠키 앤 크림',
   },
   {
     img: pic3,
-    name: '사랑에빠진딸기',
+    name: '사랑에 빠진 딸기',
   },
   {
     img: pic4,
-    name: '뉴욕치즈케이크',
+    name: '뉴욕 치즈케이크',
   },
   {
     img: pic5,
-    name: '아몬드봉봉',
+    name: '아몬드 봉봉',
   },
   {
     img: pic6,
-    name: '블랙소르베',
+    name: '블랙 소르베',
   },
   {
     img: pic7,
@@ -42,11 +42,11 @@ const gameInfo = [
   },
   {
     img: pic8,
-    name: '엄마는외계인',
+    name: '엄마는 외계인',
   },
 ]
 
-let onFight = true;
+let gameEnd = false;
 let roundNum = 1;
 
 function App() {
@@ -62,7 +62,7 @@ function App() {
       ++roundNum;
       // 최종 우승자 나옴. 
     } else if (fighters.length === 2 && winners.length === 0) {
-      onFight = false;
+      gameEnd = true;
       setFighters([fighters[0]]);
       ++roundNum;
       // 경기중.
@@ -78,7 +78,7 @@ function App() {
           setWinners([]);
           ++roundNum;
         } else if (fighters.length === 2 && winners.length === 0) {
-          onFight = false;
+          gameEnd = true;
           setFighters([fighters[1]]);
           ++roundNum;
         } else {
@@ -91,16 +91,23 @@ function App() {
       setGameNum( fighters.length / 2)
     }, [roundNum])
 
+  if (gameEnd) return (
+    <>
+      <Title> 이상형 월드컵 결과는..</Title>
+      <Round>역시 배라는 {fighters[0].name}! ❤️</Round>
+      <Winner src={fighters[0].img} />
+      <Congrats src={congrats} />
+    </>
+  )
+
   return (
     <>
       <Title> 배스킨라빈스31 메뉴 이상형 월드컵 </Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
-        {onFight && <Left src={fighters[0].img} onClick={leftWin} />}
-        {onFight && <Right src={fighters[1].img} onClick={rightWin}/>}
+        {<Left src={fighters[0].img} onClick={leftWin} />}
+        {<Right src={fighters[1].img} onClick={rightWin}/>}
       </Container>
-      {!onFight && <Winner src={fighters[0].img} />}
-      {!onFight && <Congrats src={congrats} />}
     </>
   );
 }
