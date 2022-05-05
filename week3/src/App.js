@@ -9,6 +9,7 @@ import pic5 from "./img/아몬드봉봉.png";
 import pic6 from "./img/블랙소르베.png";
 import pic7 from "./img/요거트.png";
 import pic8 from "./img/엄마는외계인.png";
+import congrats from "./img/congrats.png";
 
 const gameInfo = [
   {
@@ -80,58 +81,75 @@ function App() {
         }
   }
 
-
-
   return (
     <>
-      <Title>🍨 배스킨라빈스31 메뉴 이상형 월드컵 🍨</Title>
+      <Title> 배스킨라빈스31 메뉴 이상형 월드컵 </Title>
       <Round>{winners.length + 1} / {}</Round>
       <Container>
         {onFight && <Left src={fighters[0].img} onClick={leftWin} />}
         {onFight && <Right src={fighters[1].img} onClick={rightWin}/>}
       </Container>
+      {!onFight && <Winner src={fighters[0].img} />}
+      {!onFight && <Congrats src={congrats} />}
     </>
   );
 }
 
 const Title = styled.h1`
   font-size: 36px;
-  `
+  text-align: center;
+`;
 
 const Round = styled.h2`
   font-size: 25px;
-  `
+  text-align: center;
+`;
 
 const Container = styled.main`
-  height: 100vh;
-  width: 100vw;
+  width: 100%;
+  height: 100%;
   display:flex;
-
-  
-  `;
+`;
 
 const Left = styled.img`
-  width: 300px;
+  width: 50%;
+  height: 100%;
   background-color: blue;
-  height: 300px;
+  
 
   &:hover {
     cursor: pointer;
-    width: 350px;
-    height: 350px;
+    width: 60%
   }
-  `;
+`;
 
 const Right = styled.img`
   background-color: red;
-  width: 300px;
-  height: 300px;
+  width: 50%;
+  height: 100%;
 
   &:hover {
     cursor: pointer;
-    width: 350px;
-    height: 350px;
+    width: 60%;
   }
-  `;
+`;
+
+const Winner = styled.img`
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+`;
+
+const Congrats = styled.img`
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+`
 
 export default App;
