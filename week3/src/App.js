@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import './App.css';
 import pic1 from "./img/민트초콜릿칩.png";
@@ -80,8 +80,8 @@ function App() {
       <Title>🍨 배스킨라빈스31 메뉴 이상형 월드컵 🍨</Title>
       <Round>{winners.length + 1} / {}</Round>
       <Container>
-        <Left src={fighters[0].img} onClick={leftWin} />
-        <Right src={fighters[1].img} onClick={rightWin}/>
+        {leftWin && <Left src={fighters[0].img} onClick={leftWin} />}
+        {rightWin && <Right src={fighters[1].img} onClick={rightWin}/>}
       </Container>
     </>
   );
@@ -98,21 +98,33 @@ const Round = styled.h2`
 const Container = styled.main`
   height: 100vh;
   width: 100vw;
-
   display:flex;
+
+  
   `;
 
 const Left = styled.img`
   width: 300px;
   background-color: blue;
   height: 300px;
+
+  &:hover {
+    cursor: pointer;
+    width: 350px;
+    height: 350px;
+  }
   `;
 
 const Right = styled.img`
-background-color: red;
+  background-color: red;
   width: 300px;
   height: 300px;
 
-`;
+  &:hover {
+    cursor: pointer;
+    width: 350px;
+    height: 350px;
+  }
+  `;
 
 export default App;
