@@ -85,6 +85,7 @@ function App() {
 
   useEffect(() => {
       setGameNum(fighters.length / 2)
+      return;
     }, [roundNum])
 
   if (gameEnd) return (
