@@ -10,6 +10,7 @@ import pic6 from "./img/블랙소르베.png";
 import pic7 from "./img/요거트.png";
 import pic8 from "./img/엄마는외계인.png";
 import congrats from "./img/congrats.png";
+import versus from "./img/versus.png"
 
 const gameInfo = [
   {
@@ -114,9 +115,11 @@ function App() {
           <Name>{fighters[1].name}</Name>
         </Flavor>
       </Container>
+      <Versus src={versus} />
     </>
   );
 }
+
 
 const Title = styled.h1`
   font-size: 36px;
@@ -152,8 +155,7 @@ const Name = styled.p`
 const Left = styled.img`
   width: 100%;
   height: 100%;
-  background-color: blue;
-  
+  background-color: pink;
 
   &:hover {
     cursor: pointer;
@@ -162,9 +164,9 @@ const Left = styled.img`
 `;
 
 const Right = styled.img`
-  background-color: red;
   width: 100%;
   height: 100%;
+  background-color: skyblue;
 
   &:hover {
     cursor: pointer;
@@ -188,6 +190,14 @@ const Congrats = styled.img`
   transform: translate(-50%, -50%);
   width: 400px;
   height: 400px;
+`
+
+const Versus = styled.img`
+  width: 150px;
+  height: 150px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 
 export default App;
