@@ -88,13 +88,13 @@ function App() {
   }
 
   useEffect(() => {
-      setGameNum( fighters.length / 2)
+      setGameNum(fighters.length / 2)
     }, [roundNum])
 
   if (gameEnd) return (
     <>
-      <Title> 이상형 월드컵 결과는..</Title>
-      <Round>역시 배라는 {fighters[0].name}! ❤️</Round>
+      <Title> 역시 배라는..</Title>
+      <Round>{fighters[0].name}! ❤️</Round>
       <Winner src={fighters[0].img} />
       <Congrats src={congrats} />
     </>
@@ -105,8 +105,14 @@ function App() {
       <Title> 배스킨라빈스31 메뉴 이상형 월드컵 </Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
-        {<Left src={fighters[0].img} onClick={leftWin} />}
-        {<Right src={fighters[1].img} onClick={rightWin}/>}
+        <Flavor>
+          <Left src={fighters[0].img} onClick={leftWin} />
+          <Name>{fighters[0].name}</Name>
+        </Flavor>
+        <Flavor>
+          <Right src={fighters[1].img} onClick={rightWin}/>
+          <Name>{fighters[1].name}</Name>
+        </Flavor>
       </Container>
     </>
   );
@@ -125,36 +131,51 @@ const Round = styled.h2`
 const Container = styled.main`
   width: 100%;
   height: 100%;
-  display:flex;
+  display: flex;
 `;
 
-const Left = styled.img`
+const Flavor = styled.div`
   width: 50%;
+  height: 100%;
+  position: relative;
+`
+
+const Name = styled.p`
+  font-size: 25px;
+  position: absolute;
+  margin-left: auto;
+  left: 50%;
+  bottom: 25%;
+  transform: translate(-50%, -50%);
+`
+
+const Left = styled.img`
+  width: 100%;
   height: 100%;
   background-color: blue;
   
 
   &:hover {
     cursor: pointer;
-    width: 60%
+    transform : scale(1.05, 1.05);
   }
 `;
 
 const Right = styled.img`
   background-color: red;
-  width: 50%;
+  width: 100%;
   height: 100%;
 
   &:hover {
     cursor: pointer;
-    width: 60%;
+    transform : scale(1.05, 1.05);
   }
 `;
 
 const Winner = styled.img`
   position: absolute;
   left: 50%;
-  top: 70%;
+  top: 40%;
   transform: translate(-50%, -50%);
   width: 500px;
   height: 500px;
@@ -163,7 +184,7 @@ const Winner = styled.img`
 const Congrats = styled.img`
   position: absolute;
   left: 50%;
-  top: 90%;
+  top: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
   height: 400px;
