@@ -15,7 +15,7 @@ import versus from "./img/versus.png"
 const gameInfo = [
   {
     img: pic1,
-    name: '민트 초콜릿 칩',
+    name: '(코 끝에선 화➰❤️ 입안에선 후➰💚) 민트 초콜릿 칩',
   },
   {
     img: pic2,
@@ -106,12 +106,12 @@ function App() {
       <Title> 배스킨라빈스31 메뉴 이상형 월드컵 </Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
-        <Flavor>
-          <Left src={fighters[0].img} onClick={leftWin} />
+        <Flavor onClick={leftWin}>
+          <Left src={fighters[0].img}  />
           <Name>{fighters[0].name}</Name>
         </Flavor>
-        <Flavor>
-          <Right src={fighters[1].img} onClick={rightWin}/>
+        <Flavor onClick={rightWin}>
+          <Right src={fighters[1].img} />
           <Name>{fighters[1].name}</Name>
         </Flavor>
       </Container>
@@ -124,11 +124,13 @@ function App() {
 const Title = styled.h1`
   font-size: 36px;
   text-align: center;
+  font-family: 'LeferiPoint-WhiteObliqueA';
 `;
 
 const Round = styled.h2`
   font-size: 25px;
   text-align: center;
+  font-family: 'LeferiPoint-WhiteObliqueA';
 `;
 
 const Container = styled.main`
@@ -141,14 +143,23 @@ const Flavor = styled.div`
   width: 50%;
   height: 100%;
   position: relative;
+
+  &:hover {
+    cursor: pointer;
+    transform : scale(1.05, 1.05);
+  }
 `
 
 const Name = styled.p`
-  font-size: 25px;
+  font-size: 16px;
+  font-family: 'LeferiPoint-WhiteObliqueA';
+  font-weight: 900;
+  background-color: whitesmoke;
+  text-align: center;
   position: absolute;
-  margin-left: auto;
+  width: 40%;
   left: 50%;
-  bottom: 25%;
+  top: 75%;
   transform: translate(-50%, -50%);
 `
 
@@ -156,11 +167,6 @@ const Left = styled.img`
   width: 100%;
   height: 100%;
   background-color: pink;
-
-  &:hover {
-    cursor: pointer;
-    transform : scale(1.05, 1.05);
-  }
 `;
 
 const Right = styled.img`
@@ -168,10 +174,6 @@ const Right = styled.img`
   height: 100%;
   background-color: skyblue;
 
-  &:hover {
-    cursor: pointer;
-    transform : scale(1.05, 1.05);
-  }
 `;
 
 const Winner = styled.img`
@@ -179,6 +181,7 @@ const Winner = styled.img`
   left: 50%;
   top: 40%;
   transform: translate(-50%, -50%);
+  margin-top: 20px;
   width: 500px;
   height: 500px;
 `;
