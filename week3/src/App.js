@@ -46,6 +46,8 @@ const gameInfo = [
     name: '엄마는 외계인',
   },
 ]
+// 참가자 랜덤으로. 
+gameInfo.sort(() => Math.random() - 0.5);
 
 let gameEnd = false;
 let roundNum = 1;
@@ -95,7 +97,7 @@ function App() {
   )
 
   return (
-    <>
+    <Body>
       <Title>👑 배스킨라빈스31 메뉴 이상형 월드컵 👑</Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
@@ -109,24 +111,27 @@ function App() {
         </Flavor>
       </Container>
       <Versus src={versus} />
-    </>
+    </Body>
   );
 }
 
+const Body = styled.body`
+  position: relative;
+`
 
 const Title = styled.h1`
+  font-family: 'LeferiPoint-WhiteObliqueA';
   font-size: 36px;
   text-align: center;
-  font-family: 'LeferiPoint-WhiteObliqueA';
   background-color: rgba(0, 0, 0, 0.2);
   margin: 10px 0;
 `;
 
 const Round = styled.p`
+  font-family: 'LeferiPoint-WhiteObliqueA';
   font-size: 25px;
   font-weight: 900;
   text-align: center;
-  font-family: 'LeferiPoint-WhiteObliqueA';
 `;
 
 const Container = styled.main`
@@ -142,16 +147,16 @@ const Flavor = styled.div`
 
   &:hover {
     cursor: pointer;
-    transform : scale(1.05, 1.05);
+    transform : scale(1.1, 1);
   }
 `
 
 const Name = styled.p`
-  font-size: 16px;
   font-family: 'LeferiPoint-WhiteObliqueA';
+  font-size: 16px;
   font-weight: 900;
-  background-color: whitesmoke;
   text-align: center;
+  background-color: whitesmoke;
   position: absolute;
   width: 40%;
   left: 50%;
@@ -194,8 +199,9 @@ const Congrats = styled.img`
 const Versus = styled.img`
   width: 150px;
   height: 150px;
-  position: relative;
+  position: absolute;
   left: 50%;
+  top: 65%;
   transform: translate(-50%, -50%);
 `
 
