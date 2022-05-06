@@ -55,37 +55,30 @@ function App() {
   const [winners, setWinners] = useState([]);
   const [gameNum, setGameNum] = useState(fighters.length/2);
 
-  const leftWin = () => {
+  function win(num) {
     // 라운드 종료. 
     if (fighters.length === 2 && winners.length >= 1) {
-      setFighters([...winners, fighters[0]]);
+      setFighters([...winners, fighters[num]]);
       setWinners([]);
       ++roundNum;
       // 최종 우승자 나옴. 
     } else if (fighters.length === 2 && winners.length === 0) {
       gameEnd = true;
-      setFighters([fighters[0]]);
+      setFighters([fighters[num]]);
       ++roundNum;
       // 경기중.
-      } else {
-    setFighters(fighters.slice(2));
-    setWinners([...winners, fighters[0]]);
+    } else {
+      setFighters(fighters.slice(2));
+      setWinners([...winners, fighters[num]]);
     }
   }
 
+  const leftWin = () => {
+    win(0);
+  }
+
   const rightWin = () => {
-    if (fighters.length === 2 && winners.length >= 1) {
-          setFighters([...winners, fighters[1]]);
-          setWinners([]);
-          ++roundNum;
-        } else if (fighters.length === 2 && winners.length === 0) {
-          gameEnd = true;
-          setFighters([fighters[1]]);
-          ++roundNum;
-        } else {
-          setFighters(fighters.slice(2));
-          setWinners([...winners, fighters[1]]);
-        }
+    win(1);
   }
 
   useEffect(() => {
@@ -103,7 +96,7 @@ function App() {
 
   return (
     <>
-      <Title> 배스킨라빈스31 메뉴 이상형 월드컵 </Title>
+      <Title>👑 배스킨라빈스31 메뉴 이상형 월드컵 👑</Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
         <Flavor onClick={leftWin}>
@@ -125,10 +118,13 @@ const Title = styled.h1`
   font-size: 36px;
   text-align: center;
   font-family: 'LeferiPoint-WhiteObliqueA';
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 10px 0;
 `;
 
-const Round = styled.h2`
+const Round = styled.p`
   font-size: 25px;
+  font-weight: 900;
   text-align: center;
   font-family: 'LeferiPoint-WhiteObliqueA';
 `;
@@ -181,7 +177,7 @@ const Winner = styled.img`
   left: 50%;
   top: 40%;
   transform: translate(-50%, -50%);
-  margin-top: 20px;
+  margin-top: 40px;
   width: 500px;
   height: 500px;
 `;
@@ -189,7 +185,7 @@ const Winner = styled.img`
 const Congrats = styled.img`
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 55%;
   transform: translate(-50%, -50%);
   width: 400px;
   height: 400px;
