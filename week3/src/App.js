@@ -97,7 +97,7 @@ function App() {
   )
 
   return (
-    <Body>
+    <>
       <Title>👑 배스킨라빈스31 메뉴 이상형 월드컵 👑</Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
@@ -109,15 +109,11 @@ function App() {
           <Right src={fighters[1].img} />
           <Name>{fighters[1].name}</Name>
         </Flavor>
-      </Container>
-      <Versus src={versus} />
-    </Body>
+        <Versus src={versus} />
+      </Container>   
+    </>
   );
 }
-
-const Body = styled.body`
-  position: relative;
-`
 
 const Title = styled.h1`
   font-family: 'LeferiPoint-WhiteObliqueA';
@@ -138,6 +134,7 @@ const Container = styled.main`
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
 `;
 
 const Flavor = styled.div`
@@ -201,7 +198,7 @@ const Versus = styled.img`
   height: 150px;
   position: absolute;
   left: 50%;
-  top: 65%;
+  top: 50%;
   transform: translate(-50%, -50%);
 `
 
