@@ -98,7 +98,7 @@ function App() {
 
   return (
     <>
-      <Title>👑 배스킨라빈스31 메뉴 이상형 월드컵 👑</Title>
+      <Title>👑 배스킨라빈스31 이상형 월드컵 👑</Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
         <Flavor onClick={leftWin}>
@@ -144,7 +144,6 @@ const Flavor = styled.div`
 
   &:hover {
     cursor: pointer;
-    transform : scale(1.1, 1);
   }
 `
 
@@ -155,7 +154,7 @@ const Name = styled.p`
   text-align: center;
   background-color: whitesmoke;
   position: absolute;
-  width: 40%;
+  width: 200px;
   left: 50%;
   top: 75%;
   transform: translate(-50%, -50%);
@@ -165,12 +164,20 @@ const Left = styled.img`
   width: 100%;
   height: 100%;
   background-color: pink;
+
+  &:hover {
+    transform : scale(1.1, 1);
+  }
 `;
 
 const Right = styled.img`
   width: 100%;
   height: 100%;
   background-color: skyblue;
+
+  &:hover {
+    transform : scale(1.1, 1);
+  }
 
 `;
 
