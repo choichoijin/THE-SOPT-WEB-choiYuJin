@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState} from 'react';
 import styled from 'styled-components';
 import './App.css';
 import pic1 from "./img/민트초콜릿칩.png";
@@ -52,30 +52,23 @@ function App() {
   const [winners, setWinners] = useState([]);
   const [gameNum, setGameNum] = useState(fighters.length/2);
   const [gameEnd, setGameEnd] = useState(false);
-  const [roundNum, setRoundNum] = useState(1);
 
   function win(num) {
     // 라운드 종료. 
     if (fighters.length === 2 && winners.length >= 1) {
       setFighters([...winners, fighters[num]]);
       setWinners([]);
-      setRoundNum(roundNum + 1);
+      setGameNum(prevState => prevState / 2);
       // 최종 우승자 나옴. 
     } else if (fighters.length === 2 && winners.length === 0) {
       setGameEnd(true);
       setFighters([fighters[num]]);
-      setRoundNum(roundNum + 1);
       // 경기중.
     } else {
       setFighters(fighters.slice(2));
       setWinners([...winners, fighters[num]]);
     }
   }
-
-  useEffect(() => {
-      setGameNum(fighters.length / 2)
-      return;
-    }, [roundNum])
 
   if (gameEnd) return (
     <>
