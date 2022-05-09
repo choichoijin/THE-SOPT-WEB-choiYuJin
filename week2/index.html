@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>프랑스어 퀴즈</title>
+  </head>
+  <body>
+    <header>
+      <h1>🇫🇷 프랑스어를 배워보아요 🇫🇷</h1>
+    </header>
+    <main>
+      <section class="scoreBoard">
+        <span class="scoreBoard__score">0</span>
+        <span>점</span>
+      </section>
+      <div class="imageBoard">
+        <img src="" alt="who is this?" />
+      </div>
+      <div class="answer">
+        <header class="answer__title">
+          <h2>이 사진은 어떤 프랑스어일까요?</h2>
+        </header>
+        <ul class="answer__list">
+          <li>내 친구</li>
+          <li>매일매일</li>
+          <li>어린이</li>
+          <li>꽃미남</li>
+          <li>내 친애하는 삼촌</li>
+        </ul>
+      </div>
+      <hr />
+      <div class="buttonList">
+        <button class="buttonList__restart">🥖 다시하기 🥖</button>
+      </div>
+    </main>
+    <div class="modal hide">
+      <div class="modal__content">
+        <p class="modal__body"></p>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
