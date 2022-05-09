@@ -46,41 +46,30 @@ const gameInfo = [
     name: '엄마는 외계인',
   },
 ]
-// 참가자 랜덤으로. 
-gameInfo.sort(() => Math.random() - 0.5);
-
-let gameEnd = false;
-let roundNum = 1;
 
 function App() {
-  const [fighters, setFighters] = useState(gameInfo);
+  const [fighters, setFighters] = useState(gameInfo.sort(() => Math.random() - 0.5));
   const [winners, setWinners] = useState([]);
   const [gameNum, setGameNum] = useState(fighters.length/2);
+  const [gameEnd, setGameEnd] = useState(false);
+  const [roundNum, setRoundNum] = useState(1);
 
   function win(num) {
     // 라운드 종료. 
     if (fighters.length === 2 && winners.length >= 1) {
       setFighters([...winners, fighters[num]]);
       setWinners([]);
-      ++roundNum;
+      setRoundNum(roundNum + 1);
       // 최종 우승자 나옴. 
     } else if (fighters.length === 2 && winners.length === 0) {
-      gameEnd = true;
+      setGameEnd(true);
       setFighters([fighters[num]]);
-      ++roundNum;
+      setRoundNum(roundNum + 1);
       // 경기중.
     } else {
       setFighters(fighters.slice(2));
       setWinners([...winners, fighters[num]]);
     }
-  }
-
-  const leftWin = () => {
-    win(0);
-  }
-
-  const rightWin = () => {
-    win(1);
   }
 
   useEffect(() => {
@@ -102,11 +91,11 @@ function App() {
       <Title>👑 배스킨라빈스31 이상형 월드컵 👑</Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
-        <Flavor onClick={leftWin}>
+        <Flavor onClick={() => win(0)}>
           <Left src={fighters[0].img}  />
           <Name>{fighters[0].name}</Name>
         </Flavor>
-        <Flavor onClick={rightWin}>
+        <Flavor onClick={() => win(1)}>
           <Right src={fighters[1].img} />
           <Name>{fighters[1].name}</Name>
         </Flavor>
