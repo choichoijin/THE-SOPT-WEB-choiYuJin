@@ -71,7 +71,7 @@ function App() {
           setWinners([...winners, fighters[num]]);
         }
         e.target.classList.remove('clicked');
-      }, 1000)
+      }, 1500)
   }
 
 
@@ -135,12 +135,6 @@ const Flavor = styled.div`
     transform : scale(1.1, 1);
     z-index: 1;
   }
-
-  &.clicked {
-    transition: 1s all;
-    transform: scaleX(2);
-    transform: translate(-50%);
-  }
 `;
 
 
@@ -162,12 +156,24 @@ const Left = styled.img`
   width: 100%;
   height: 100%;
   background-color: pink;
+
+  &.clicked {
+    transition: 1.5s all;
+    transform-origin: left;
+    transform: scaleX(2);
+  }
 `;
 
 const Right = styled.img`
   width: 100%;
   height: 100%;
   background-color: skyblue;
+
+  &.clicked {
+    transition: 1.5s all;
+    transform-origin: right;
+    transform: scaleX(2);
+  }
 `;
 
 const Winner = styled.img`
