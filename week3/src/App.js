@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 import pic1 from "./img/민트초콜릿칩.png";
@@ -53,22 +53,27 @@ function App() {
   const [gameNum, setGameNum] = useState(fighters.length/2);
   const [gameEnd, setGameEnd] = useState(false);
 
-  function win(num) {
-    // 라운드 종료. 
-    if (fighters.length === 2 && winners.length >= 1) {
-      setFighters([...winners, fighters[num]]);
-      setWinners([]);
-      setGameNum(prevState => prevState / 2);
-      // 최종 우승자 나옴. 
-    } else if (fighters.length === 2 && winners.length === 0) {
-      setGameEnd(true);
-      setFighters([fighters[num]]);
-      // 경기중.
-    } else {
-      setFighters(fighters.slice(2));
-      setWinners([...winners, fighters[num]]);
-    }
+  function win(num, e) {
+      e.target.classList.add('clicked');
+      setTimeout(() => {
+        // 라운드 종료. 
+        if (fighters.length === 2 && winners.length >= 1) {
+          setFighters([...winners, fighters[num]]);
+          setWinners([]);
+          setGameNum(prevState => prevState / 2);
+        // 최종 우승자 나옴. 
+        } else if (fighters.length === 2 && winners.length === 0) {
+          setGameEnd(true);
+          setFighters([fighters[num]]);
+        // 경기중.
+        } else {
+          setFighters(fighters.slice(2));
+          setWinners([...winners, fighters[num]]);
+        }
+        e.target.classList.remove('clicked');
+      }, 1000)
   }
+
 
   if (gameEnd) return (
     <>
@@ -84,11 +89,11 @@ function App() {
       <Title>👑 배스킨라빈스31 이상형 월드컵 👑</Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
-        <Flavor onClick={() => win(0)}>
+        <Flavor onClick={(e) => win(0, e)}>
           <Left src={fighters[0].img}  />
           <Name>{fighters[0].name}</Name>
         </Flavor>
-        <Flavor onClick={() => win(1)}>
+        <Flavor onClick={(e) => win(1, e)}>
           <Right src={fighters[1].img} />
           <Name>{fighters[1].name}</Name>
         </Flavor>
@@ -127,8 +132,18 @@ const Flavor = styled.div`
 
   &:hover {
     cursor: pointer;
+    transform : scale(1.1, 1);
+    z-index: 1;
   }
-`
+
+  &.clicked {
+    transition: 1s all;
+    transform: scaleX(2);
+    transform: translate(-50%);
+  }
+`;
+
+
 
 const Name = styled.p`
   font-family: 'LeferiPoint-WhiteObliqueA';
@@ -147,21 +162,12 @@ const Left = styled.img`
   width: 100%;
   height: 100%;
   background-color: pink;
-
-  &:hover {
-    transform : scale(1.1, 1);
-  }
 `;
 
 const Right = styled.img`
   width: 100%;
   height: 100%;
   background-color: skyblue;
-
-  &:hover {
-    transform : scale(1.1, 1);
-  }
-
 `;
 
 const Winner = styled.img`
@@ -190,6 +196,7 @@ const Versus = styled.img`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
 `
 
 export default App;
