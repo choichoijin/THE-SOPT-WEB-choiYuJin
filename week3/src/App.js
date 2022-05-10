@@ -10,9 +10,18 @@ function App() {
   const [winners, setWinners] = useState([]);
   const [gameNum, setGameNum] = useState(fighters.length/2);
   const [gameEnd, setGameEnd] = useState(false);
+  const [winnerClicked, setWinnerClicked] = useState(0);
 
-  function win(num, e) {
-      e.target.classList.add('clicked');
+
+  function win(num) {
+      //왼쪽 클릭.
+      if (num === 0) {
+        setWinnerClicked(-1);
+        // 오른쪽 클릭.
+      } else {
+        setWinnerClicked(1);
+      }
+
       setTimeout(() => {
         // 라운드 종료. 
         if (fighters.length === 2 && winners.length >= 1) {
@@ -28,7 +37,7 @@ function App() {
           setFighters(fighters.slice(2));
           setWinners([...winners, fighters[num]]);
         }
-        e.target.classList.remove('clicked');
+        setWinnerClicked(0);
       }, 1500)
   }
 
@@ -49,15 +58,15 @@ function App() {
       <Title>👑 배스킨라빈스31 이상형 월드컵 👑</Title>
       <Round>{winners.length + 1} / {gameNum}</Round>
       <Container>
-        <Flavor onClick={(e) => win(0, e)}>
-          <Left src={fighters[0].img}  />
-          <Name>{fighters[0].name}</Name>
+        <Flavor onClick={() => win(0)}>
+          <Left src={fighters[0].img} winnerClicked = {winnerClicked}/>
+          {!winnerClicked && <Name>{fighters[0].name}</Name>}
         </Flavor>
-        <Flavor onClick={(e) => win(1, e)}>
-          <Right src={fighters[1].img} />
-          <Name>{fighters[1].name}</Name>
+        <Flavor onClick={() => win(1) }>
+          <Right src={fighters[1].img} winnerClicked = {winnerClicked}/>
+          {!winnerClicked && <Name>{fighters[1].name}</Name>}
         </Flavor>
-        <Versus src={versus} />
+        {!winnerClicked && <Versus src={versus} />}
       </Container>   
     </>
   );
@@ -117,11 +126,9 @@ const Left = styled.img`
   height: 100%;
   background-color: pink;
 
-  &.clicked {
-    transition: 1.5s all;
-    transform-origin: left;
-    transform: scaleX(2);
-  }
+  transition: ${props => (props.winnerClicked === -1 ? '1.5s all' : null)};
+  transform-origin: ${props => (props.winnerClicked === -1 ? 'left' : null)};
+  transform: ${props => (props.winnerClicked === -1 ? 'scaleX(2)' : null)};
 `;
 
 const Right = styled.img`
@@ -129,11 +136,9 @@ const Right = styled.img`
   height: 100%;
   background-color: skyblue;
 
-  &.clicked {
-    transition: 1.5s all;
-    transform-origin: right;
-    transform: scaleX(2);
-  }
+  transition: ${props => props.winnerClicked === 1 ? '1.5s all' : null};
+  transform-origin: ${props => props.winnerClicked === 1 ? 'right' : null};
+  transform: ${props => props.winnerClicked === 1 ? 'scaleX(2)' : null};
 `;
 
 const Winner = styled.img`
