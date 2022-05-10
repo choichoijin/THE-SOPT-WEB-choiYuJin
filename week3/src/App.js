@@ -1,51 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
-import pic1 from "./img/민트초콜릿칩.png";
-import pic2 from "./img/오레오쿠키앤크림.png";
-import pic3 from "./img/사랑에빠진딸기.png";
-import pic4 from "./img/뉴욕치즈케이크.png";
-import pic5 from "./img/아몬드봉봉.png";
-import pic6 from "./img/블랙소르베.png";
-import pic7 from "./img/요거트.png";
-import pic8 from "./img/엄마는외계인.png";
+import { gameInfo } from "./gameInfo.js"
 import congrats from "./img/congrats.png";
 import versus from "./img/versus.png"
-
-const gameInfo = [
-  {
-    img: pic1,
-    name: '(코 끝에선 화➰❤️ 입안에선 후➰💚) 민트 초콜릿 칩',
-  },
-  {
-    img: pic2,
-    name: '오레오 쿠키 앤 크림',
-  },
-  {
-    img: pic3,
-    name: '사랑에 빠진 딸기',
-  },
-  {
-    img: pic4,
-    name: '뉴욕 치즈케이크',
-  },
-  {
-    img: pic5,
-    name: '아몬드 봉봉',
-  },
-  {
-    img: pic6,
-    name: '블랙 소르베',
-  },
-  {
-    img: pic7,
-    name: '요거트',
-  },
-  {
-    img: pic8,
-    name: '엄마는 외계인',
-  },
-]
 
 function App() {
   const [fighters, setFighters] = useState(gameInfo.sort(() => Math.random() - 0.5));
@@ -75,14 +33,16 @@ function App() {
   }
 
 
-  if (gameEnd) return (
-    <>
-      <Title> 역시 배라는..</Title>
-      <Round>{fighters[0].name}! ❤️</Round>
-      <Winner src={fighters[0].img} />
-      <Congrats src={congrats} />
-    </>
-  )
+  if (gameEnd) {
+    return (
+      <>
+        <Title> 역시 배라는..</Title>
+        <Round>{fighters[0].name}! ❤️</Round>
+        <Winner src={fighters[0].img} />
+        <Congrats src={congrats} />
+      </>
+    )
+  }
 
   return (
     <>
@@ -177,11 +137,8 @@ const Right = styled.img`
 `;
 
 const Winner = styled.img`
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translate(-50%, -50%);
-  margin-top: 40px;
+  display: block; 
+  margin: 0px auto;
   width: 500px;
   height: 500px;
 `;
