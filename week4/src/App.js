@@ -8,51 +8,53 @@ function App() {
   const searchRef = useRef();
   const [checked, setChecked] = useState(false);
 
-  // // 내 위치 정보 가져오기.
-  // const getLocation = (errHandler) => {
-  //   if ("geolocation" in navigator) {
-  //     return new Promise((resolve) => {
-  //       navigator.geolocation.getCurrentPosition(
-  //         (position) => {
-  //           const {
-  //             coords: { latitude: y, longitude: x },
-  //           } = position;
-  //           resolve({ x, y });
-  //         },
-  //         (e) => {
-  //           alert("HTTPS 연결을 확인해주세요.");
-  //           errHandler && errHandler();
-  //         }
-  //       );
-  //     });
-  //   }
+  // 내 위치 정보 가져오기.
+  const getLocation = (errHandler) => {
+    if ("geolocation" in navigator) {
+      return new Promise((resolve) => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const {
+              coords: { latitude: y, longitude: x },
+            } = position;
+            resolve({ x, y });
+          },
+          (e) => {
+            alert("HTTPS 연결을 확인해주세요.");
+            errHandler && errHandler();
+          }
+        );
+      });
+    }
 
-  //   return (
-  //     { x: 126.8350976, y: 37.617664}
-  //     )
-  // };
+    return (
+      //테스트용 여수 지도.
+      { x: 127.661064, y: 34.766175}
+      )
+  };
 
-  // async function 위치가져오기(){
-  //   const result = await getLocation();
-  // }
+  async function 위치가져오기(){
+    const result = await getLocation();
+    내근처떡볶이집가져오기(result.x, result.y);
+  }
 
-  // async function 내근처떡볶이집가져오기() {
-  //   const result = await axios.get(
-  //     "https://dapi.kakao.com/v2/local/search/keyword",
-  //     {
-  //       headers: {
-  //         Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_AK}`,
-  //       },
-  //       params: {
-  //         x: 30,
-  //         y: 30,
-  //         radius: 1000,
-  //         query: '떡볶이',
-  //       }
-  //     }
-  //   )
-  //   setStoreList(result.data.documents);
-  // };
+  async function 내근처떡볶이집가져오기(longitude, latitude) {
+    const result = await axios.get(
+      "https://dapi.kakao.com/v2/local/search/keyword",
+      {
+        headers: {
+          Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_AK}`,
+        },
+        params: {
+          x: longitude,
+          y: latitude,
+          radius: 1000,
+          query: '떡볶이',
+        }
+      }
+    )
+    setStoreList(result.data.documents);
+  };
 
   async function 특정지역떡볶이집가져오기(location) {
     const result = await axios.get(
@@ -77,8 +79,6 @@ function App() {
     }
   }
 
-  console.log(checked);
-
   // 제출 버튼 핸들링. 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,6 +86,10 @@ function App() {
     if (searchRef.current) {
       const regionInput = searchRef.current;
       특정지역떡볶이집가져오기(regionInput.value);
+    } 
+    
+    if (checked) {
+      위치가져오기();
     }
   }
 
