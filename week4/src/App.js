@@ -7,6 +7,7 @@ function App() {
   const [storeList, setStoreList] = useState([]);
   const searchRef = useRef();
   const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // 내 위치 정보 가져오기.
   const getLocation = (errHandler) => {
@@ -33,30 +34,41 @@ function App() {
       )
   };
 
-  async function 위치가져오기(){
+  async function getMyLocation(){
     const result = await getLocation();
-    내근처떡볶이집가져오기(result.x, result.y);
+    getStoreBasedLocation(result.x, result.y);
   }
 
-  async function 내근처떡볶이집가져오기(longitude, latitude) {
-    const result = await axios.get(
-      "https://dapi.kakao.com/v2/local/search/keyword",
-      {
-        headers: {
-          Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_AK}`,
-        },
-        params: {
-          x: longitude,
-          y: latitude,
-          radius: 1000,
-          query: '떡볶이',
+  async function getStoreBasedLocation(longitude, latitude) {
+    try {
+      setIsLoading(true);
+      const result = await axios.get(
+        "https://dapi.kakao.com/v2/local/search/keyword",
+        {
+          headers: {
+            Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_AK}`,
+          },
+          params: {
+            x: longitude,
+            y: latitude,
+            radius: 1000,
+            query: '떡볶이',
+          }
         }
-      }
-    )
-    setStoreList(result.data.documents);
+      )
+      setStoreList(result.data.documents);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    }
+    
+    
   };
 
-  async function 특정지역떡볶이집가져오기(location) {
+  async function getStoreBasedSearch(location) {
     const result = await axios.get(
       "https://dapi.kakao.com/v2/local/search/keyword",
       {
@@ -81,19 +93,25 @@ function App() {
 
   // 제출 버튼 핸들링. 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (searchRef.current) {
-      const regionInput = searchRef.current;
-      특정지역떡볶이집가져오기(regionInput.value);
-    } 
+    e.preventDefault(); 
     
     if (checked) {
-      위치가져오기();
+      getMyLocation();
+    } else {
+      if (searchRef.current) {
+        const regionInput = searchRef.current;
+        getStoreBasedSearch(regionInput.value);
+      }
     }
   }
 
   const showStoreList = () => {
+
+    if (isLoading)
+      return (
+        <p>로딩중 ...</p>
+      )
+
     return storeList.map(({ id, place_name, phone, address_name }) => (
       <Store key={id}>
         <h3>{place_name}</h3>
