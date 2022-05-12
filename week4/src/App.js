@@ -35,12 +35,21 @@ function App() {
   };
 
   async function getMyLocation(){
-    const result = await getLocation();
-    getStoreBasedLocation(result.x, result.y);
+    try {
+      setIsLoading(true);
+      const result = await getLocation();
+      getStoreBasedLocation(result.x, result.y);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    }
+
   }
 
   async function getStoreBasedLocation(longitude, latitude) {
-    try {
       setIsLoading(true);
       const result = await axios.get(
         "https://dapi.kakao.com/v2/local/search/keyword",
@@ -57,15 +66,6 @@ function App() {
         }
       )
       setStoreList(result.data.documents);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1500);
-    }
-    
-    
   };
 
   async function getStoreBasedSearch(location) {
@@ -98,9 +98,9 @@ function App() {
     if (checked) {
       getMyLocation();
     } else {
-      if (searchRef.current) {
-        const regionInput = searchRef.current;
-        getStoreBasedSearch(regionInput.value);
+        if (searchRef.current) {
+          const regionInput = searchRef.current;
+          getStoreBasedSearch(regionInput.value);
       }
     }
   }
