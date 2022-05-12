@@ -112,11 +112,11 @@ function App() {
         <p>로딩중 ...</p>
       )
 
-    return storeList.map(({ id, place_name, phone, address_name }) => (
+    return storeList.map(({ id, place_name, phone, address_name, distance }) => (
       <Store key={id}>
         <h3>{place_name}</h3>
         <p>{phone}</p>
-        <p>{address_name}</p>
+        {checked ? <p>{distance}미터 거리</p> : <p>{address_name}</p>}
       </Store>
     ));
   };
