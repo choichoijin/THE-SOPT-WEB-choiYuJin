@@ -107,10 +107,17 @@ function App() {
 
   const showStoreList = () => {
 
-    if (isLoading)
+    if (isLoading) {
       return (
-        <p>로딩중 ...</p>
+        <Loading>로딩중 ...</Loading>
+      ) 
+    } 
+    
+    if (storeList.length === 0) {
+      return (
+        <p>결과가 없습니다.</p>
       )
+    }
 
     return storeList.map(({ id, place_name, phone, address_name, distance }) => (
       <Store key={id}>
@@ -194,6 +201,13 @@ const Store = styled.li`
   background-color: skyblue;
   margin: 10px auto;
   border-radius: 15px;
+`
+
+const Loading = styled.div`
+  height: 250px;
+  width: 100%;
+  margin-top: 50px;
+  text-align: center;
 `
 
 export default App;
