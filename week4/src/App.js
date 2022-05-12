@@ -109,21 +109,24 @@ function App() {
 
     if (isLoading) {
       return (
-        <Loading>로딩중 ...</Loading>
+        <ListDefault>로딩중 ...</ListDefault>
       ) 
     } 
     
     if (storeList.length === 0) {
       return (
-        <p>결과가 없습니다.</p>
+        <ListDefault>결과가 없습니다.</ListDefault>
       )
     }
 
-    return storeList.map(({ id, place_name, phone, address_name, distance }) => (
+
+    return storeList.map(({ id, place_name, phone, address_name, distance, place_url}) => (
       <Store key={id}>
-        <h3>{place_name}</h3>
-        <p>{phone}</p>
-        {checked ? <p>{distance}미터 거리</p> : <p>{address_name}</p>}
+        <StoreContainer>
+          <a href={place_url}>{place_name}</a>
+          {!phone ? <div>정보가 없어요</div> : <div>{phone}</div>}
+          {checked ? <p>{distance}미터 거리</p> : <p>{address_name}</p>}
+        </StoreContainer>
       </Store>
     ));
   };
@@ -152,7 +155,7 @@ function App() {
 const Container = styled.main`
   width: 400px;
   height: 100%;
-  background-color: orange;
+  background-color: #D53704;
   margin: 10px auto;
   border-radius: 30px;
 `;
@@ -198,16 +201,47 @@ const StoreList = styled.ul`
 const Store = styled.li`
   height: 80px;
   width: 350px;
-  background-color: skyblue;
+  background-color: #EBA635;
   margin: 10px auto;
   border-radius: 15px;
 `
 
-const Loading = styled.div`
-  height: 250px;
+const StoreContainer = styled.div`
+
+    margin: 10px 10px;
+    font-size: 15px;
+    position: relative;
+
+    & > a {
+      text-decoration: none;
+      color: white;
+      font-weight: 900;
+      font-size: 25px;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    & > div {
+      display: inline;
+      background-color: #F3F2D3;
+      border-radius: 50px;
+      padding: 3px 3px;
+    }
+
+    & > p {
+      display: inline;
+      position: absolute;
+      right: 2px;
+    }
+
+`
+
+const ListDefault = styled.div`
+  height: 150px;
   width: 100%;
-  margin-top: 50px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export default App;
