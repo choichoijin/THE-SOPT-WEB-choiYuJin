@@ -6,6 +6,7 @@ import GlobalStyle from './globalStyle.js';
 function App() {
   const [storeList, setStoreList] = useState([]);
   const searchRef = useRef();
+  const [checked, setChecked] = useState(false);
 
   // // 내 위치 정보 가져오기.
   // const getLocation = (errHandler) => {
@@ -26,14 +27,14 @@ function App() {
   //     });
   //   }
 
-  //   return { x: 127, y: 37.6};
-  // }
+  //   return (
+  //     { x: 126.8350976, y: 37.617664}
+  //     )
+  // };
 
   // async function 위치가져오기(){
   //   const result = await getLocation();
   // }
-
-  // //getLocation().then((result) => ...);
 
   // async function 내근처떡볶이집가져오기() {
   //   const result = await axios.get(
@@ -43,13 +44,14 @@ function App() {
   //         Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_AK}`,
   //       },
   //       params: {
-  //         place_name: 가게이름,
-  //         phone: 가게번호,
-  //         address_name: 가게주소,
+  //         x: 30,
+  //         y: 30,
+  //         radius: 1000,
   //         query: '떡볶이',
   //       }
   //     }
   //   )
+  //   setStoreList(result.data.documents);
   // };
 
   async function 특정지역떡볶이집가져오기(location) {
@@ -67,7 +69,15 @@ function App() {
     setStoreList(result.data.documents);
   }
 
+  const handleCheck = () => {
+    if (checked) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
+  }
 
+  console.log(checked);
 
   // 제출 버튼 핸들링. 
   const handleSubmit = (e) => {
@@ -96,10 +106,10 @@ function App() {
         <Title>우리 동네 떡볶이집</Title>
         <hr></hr>
         <BaseInfo>
-          <LocationBased>▶︎ 지역 기반으로 검색할게요 <input type = "checkbox"></input></LocationBased>
+          <LocationBased>▶︎ 지역 기반으로 검색할게요 <input type = "checkbox" onChange={() => handleCheck()}></input></LocationBased>
           우리 동네는 여기에요
           <form onSubmit={(e) => handleSubmit(e)}>
-            <input ref={searchRef} type = "text" placeholder = "지역이름을 입력하세요" />
+            <input ref={searchRef} type = "text" placeholder = "지역이름을 입력하세요" disabled = {checked}/>
             <button type = "submit">검색하기!</button>
           </form>
         </BaseInfo>
