@@ -9,7 +9,7 @@ function App() {
 
   // 보여줄 가게 정보 가져오기.
   const getStore = async () => {
-    setStoreList();
+    console.log(storeList);
   }
 
   async function 특정지역떡볶이집가져오기(location) {
@@ -39,6 +39,17 @@ function App() {
     }
   }
 
+  const showStoreList = () => {
+    return storeList.map(({ id, place_name, phone, address_name }) => (
+      <Store key={id}>
+        <h3>{place_name}</h3>
+        <p>{phone}</p>
+        <p>{address_name}</p>
+      </Store>
+    ));
+  };
+
+
   //첫 렌더링 후 가게 정보 불러오기.
   useEffect(() => {
     getStore();
@@ -59,9 +70,7 @@ function App() {
           </form>
         </BaseInfo>
         <hr></hr>
-        <List>
-
-        </List>
+        <StoreList>{showStoreList()}</StoreList>
       </Container>
     </>
   );
@@ -105,8 +114,20 @@ const LocationBased = styled.p`
   font-size: 20px;
 `;
 
-const List = styled.ul`
-  height: 150px; //임시.
+const StoreList = styled.ul`
+  height: 100%;
+
+  display: flex;
+  list-style: none;
+  flex-direction: column;
 `;
+
+const Store = styled.li`
+  height: 80px;
+  width: 350px;
+  background-color: skyblue;
+  margin: 10px auto;
+  border-radius: 15px;
+`
 
 export default App;
