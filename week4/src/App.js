@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import GlobalStyle from './globalStyle.js';
@@ -7,10 +7,50 @@ function App() {
   const [storeList, setStoreList] = useState([]);
   const searchRef = useRef();
 
-  // 보여줄 가게 정보 가져오기.
-  const getStore = async () => {
-    console.log(storeList);
-  }
+  // // 내 위치 정보 가져오기.
+  // const getLocation = (errHandler) => {
+  //   if ("geolocation" in navigator) {
+  //     return new Promise((resolve) => {
+  //       navigator.geolocation.getCurrentPosition(
+  //         (position) => {
+  //           const {
+  //             coords: { latitude: y, longitude: x },
+  //           } = position;
+  //           resolve({ x, y });
+  //         },
+  //         (e) => {
+  //           alert("HTTPS 연결을 확인해주세요.");
+  //           errHandler && errHandler();
+  //         }
+  //       );
+  //     });
+  //   }
+
+  //   return { x: 127, y: 37.6};
+  // }
+
+  // async function 위치가져오기(){
+  //   const result = await getLocation();
+  // }
+
+  // //getLocation().then((result) => ...);
+
+  // async function 내근처떡볶이집가져오기() {
+  //   const result = await axios.get(
+  //     "https://dapi.kakao.com/v2/local/search/keyword",
+  //     {
+  //       headers: {
+  //         Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_AK}`,
+  //       },
+  //       params: {
+  //         place_name: 가게이름,
+  //         phone: 가게번호,
+  //         address_name: 가게주소,
+  //         query: '떡볶이',
+  //       }
+  //     }
+  //   )
+  // };
 
   async function 특정지역떡볶이집가져오기(location) {
     const result = await axios.get(
@@ -20,7 +60,7 @@ function App() {
           Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_AK}`,
         },
         params: {
-          query: location + " " + '떡볶이',
+          query: location + " 떡볶이",
         }
       }
     )
@@ -48,12 +88,6 @@ function App() {
       </Store>
     ));
   };
-
-
-  //첫 렌더링 후 가게 정보 불러오기.
-  useEffect(() => {
-    getStore();
-  }, []);
 
   return (
     <>
