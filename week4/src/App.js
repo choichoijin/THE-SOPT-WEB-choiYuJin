@@ -84,11 +84,7 @@ function App() {
   }
 
   const handleCheck = () => {
-    if (checked) {
-      setChecked(false);
-    } else {
-      setChecked(true);
-    }
+    (checked) ? setChecked(false) : setChecked(true)
   }
 
   // 제출 버튼 핸들링. 
@@ -97,12 +93,10 @@ function App() {
     
     if (checked) {
       getMyLocation();
-    } else {
-        if (searchRef.current) {
+    } else if (searchRef.current) {
           const regionInput = searchRef.current;
           getStoreBasedSearch(regionInput.value);
       }
-    }
   }
 
   const showStoreList = () => {
@@ -122,11 +116,11 @@ function App() {
 
     return storeList.map(({ id, place_name, phone, address_name, distance, place_url}) => (
       <Store key={id}>
-        <StoreContainer>
-          <a href={place_url}>{place_name}</a>
+        <StoreTextContainer>
+          <a href={place_url}>🥄 {place_name}</a>
           {!phone ? <div>정보가 없어요</div> : <div>{phone}</div>}
           {checked ? <p>{distance}미터 거리</p> : <p>{address_name}</p>}
-        </StoreContainer>
+        </StoreTextContainer>
       </Store>
     ));
   };
@@ -199,17 +193,17 @@ const StoreList = styled.ul`
 `;
 
 const Store = styled.li`
-  height: 80px;
+  height: 100%;
   width: 350px;
   background-color: #EBA635;
   margin: 10px auto;
-  border-radius: 15px;
+  border-radius: 30px;
 `
 
-const StoreContainer = styled.div`
+const StoreTextContainer = styled.div`
 
-    margin: 10px 10px;
-    font-size: 15px;
+    margin: 10px 15px;
+    font-size: 13px;
     position: relative;
 
     & > a {
