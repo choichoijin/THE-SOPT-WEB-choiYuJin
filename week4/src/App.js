@@ -37,8 +37,8 @@ function App() {
   async function getMyLocation(){
     try {
       setIsLoading(true);
-      const result = await getLocation();
-      getStoreBasedLocation(result.x, result.y);
+      const { x, y } = await getLocation();
+      getStoreBasedLocation(x, y);
     } catch (error) {
       console.error(error);
     } finally {
@@ -83,8 +83,8 @@ function App() {
     setStoreList(result.data.documents);
   }
 
-  const handleCheck = () => {
-    (checked) ? setChecked(false) : setChecked(true)
+  const handleInputDisabled = () => {
+    setChecked(prev => !prev);
   }
 
   // 제출 버튼 핸들링. 
@@ -93,7 +93,7 @@ function App() {
     
     if (checked) {
       getMyLocation();
-    } else if (searchRef.current) {
+    } else {
           const regionInput = searchRef.current;
           getStoreBasedSearch(regionInput.value);
       }
@@ -118,8 +118,12 @@ function App() {
       <Store key={id}>
         <StoreTextContainer>
           <a href={place_url}>🥄 {place_name}</a>
-          {!phone ? <div>정보가 없어요</div> : <div>{phone}</div>}
-          {checked ? <p>{distance}미터 거리</p> : <p>{address_name}</p>}
+          <div>
+            {!phone ? "정보가 없어요" : phone}
+          </div>
+          <p>
+            {checked ? `${distance}미터 거리` : address_name}
+          </p>
         </StoreTextContainer>
       </Store>
     ));
@@ -132,7 +136,7 @@ function App() {
         <Title>우리 동네 떡볶이집</Title>
         <hr></hr>
         <BaseInfo>
-          <LocationBased>▶︎ 지역 기반으로 검색할게요 <input type = "checkbox" onChange={() => handleCheck()}></input></LocationBased>
+          <LocationBased>▶︎ 지역 기반으로 검색할게요 <input type = "checkbox" onChange={handleInputDisabled}></input></LocationBased>
           우리 동네는 여기에요
           <form onSubmit={(e) => handleSubmit(e)}>
             <input ref={searchRef} type = "text" placeholder = "지역이름을 입력하세요" disabled = {checked}/>
