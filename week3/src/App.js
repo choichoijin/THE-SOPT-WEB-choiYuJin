@@ -5,15 +5,17 @@ import { gameInfo } from "./gameInfo.js"
 import congrats from "./img/congrats.png";
 import versus from "./img/versus.png"
 
+gameInfo.sort(() => Math.random() - 0.5);
+
 function App() {
-  const [fighters, setFighters] = useState(gameInfo.sort(() => Math.random() - 0.5));
+  const [fighters, setFighters] = useState(gameInfo);
   const [winners, setWinners] = useState([]);
   const [gameNum, setGameNum] = useState(fighters.length/2);
   const [gameEnd, setGameEnd] = useState(false);
   const [winnerClicked, setWinnerClicked] = useState(0);
 
-
   function win(num) {
+      
       //왼쪽 클릭.
       if (num === 0) {
         setWinnerClicked(-1);
@@ -28,14 +30,17 @@ function App() {
           setFighters([...winners, fighters[num]]);
           setWinners([]);
           setGameNum(prevState => prevState / 2);
+          console.log(fighters)
         // 최종 우승자 나옴. 
         } else if (fighters.length === 2 && winners.length === 0) {
           setGameEnd(true);
           setFighters([fighters[num]]);
+          console.log(fighters)
         // 경기중.
         } else {
-          setFighters(fighters.slice(2));
           setWinners([...winners, fighters[num]]);
+          setFighters(fighters.slice(2));
+          console.log(fighters);
         }
         setWinnerClicked(0);
       }, 1500)
