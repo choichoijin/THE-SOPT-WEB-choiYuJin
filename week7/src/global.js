@@ -11,6 +11,14 @@ ${reset}
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Unilab';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205-2@1.0/Unilab.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
   #root, body, html {
     padding: 0;
     margin: 0;
