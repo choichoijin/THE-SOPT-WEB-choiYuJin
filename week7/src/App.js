@@ -1,12 +1,18 @@
-import "./App.css";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Write from "./pages/Write";
 
 function App() {
   return (
-    <>
-      <header>
-        <h1>웹파트 비밀 편지함</h1>
-      </header>
-    </>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/write" element={<Write />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
