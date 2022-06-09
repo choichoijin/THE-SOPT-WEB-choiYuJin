@@ -5,7 +5,7 @@ export const Cards = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 2rem;
+  margin: 2rem 0;
   gap: 2rem;
   font-size: 2.5rem;
 
@@ -15,6 +15,7 @@ export const Cards = styled.ul`
     border: black solid;
     background-color: rgb(252, 251, 234);
     padding: 1.5rem;
+    position: relative;
   }
 
   img {
@@ -23,6 +24,15 @@ export const Cards = styled.ul`
     margin-left: 0.3rem;
     border-radius: 50%;
   }
+`;
+
+export const CardCover = styled.article`
+  height: 18rem;
+  width: 24rem;
+  //background-color: blue;
+  position: absolute;
+  left: 0;
+  top: 0;
 `;
 
 export const WriterInfo = styled.div`

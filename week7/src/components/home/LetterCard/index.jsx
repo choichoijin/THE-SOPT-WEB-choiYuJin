@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Cards, WriterInfo } from "./style";
+import { Cards, CardCover, WriterInfo } from "./style";
 import axios from "axios";
 
 function LetterCards() {
@@ -20,6 +20,7 @@ function LetterCards() {
 
   const letterList = letterData.map((letter) => (
     <li key={letter._id}>
+      <CardCover onClick={showModal} />
       <WriterInfo>
         <span>From. {letter.name}</span>
         <img alt="프로필 이미지" src={letter.images[0]} />
@@ -27,6 +28,10 @@ function LetterCards() {
       <p>{letter.content}</p>
     </li>
   ));
+
+  function showModal() {
+    console.log("letter is clicked");
+  }
 
   return <Cards>{letterList}</Cards>;
 }
