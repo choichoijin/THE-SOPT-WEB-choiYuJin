@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
-export const Cards = styled.ul`
-  font-family: "Unilab";
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 2rem 0;
-  gap: 2rem;
-  font-size: 2.5rem;
+export const Cards = styled.section`
+  ul {
+    font-family: "Unilab";
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2rem 0;
+    gap: 2rem;
+    font-size: 2.5rem;
+  }
 
   li {
     height: 18rem;
@@ -26,17 +28,29 @@ export const Cards = styled.ul`
   }
 `;
 
-export const CardCover = styled.article`
-  height: 18rem;
-  width: 24rem;
-  //background-color: blue;
-  position: absolute;
-  left: 0;
-  top: 0;
-`;
+// export const CardCover = styled.article`
+//   height: 18rem;
+//   width: 24rem;
+//   //background-color: blue;
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+// `;
 
 export const WriterInfo = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
 `;
+
+export const StyledRoot = styled.div`
+  width: 25rem;
+  height: 17rem;
+  background-color: skyblue;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export const ButtonContainer = styled.div``;
