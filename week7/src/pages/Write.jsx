@@ -1,7 +1,8 @@
 import React from "react";
+import WritingArea from "components/write/WritingArea";
 
 const Write = () => {
-  return <h1>This is write page</h1>;
+  return <WritingArea />;
 };
 
 export default Write;

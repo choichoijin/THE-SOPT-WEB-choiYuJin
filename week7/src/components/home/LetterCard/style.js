@@ -18,6 +18,11 @@ export const Cards = styled.section`
     background-color: rgb(252, 251, 234);
     padding: 1.5rem;
     position: relative;
+
+    //초기 letterText 안보이게
+    /* div {
+      display: ${(props) => (props.isLocked ? null : "none")};
+    } */
   }
 
   img {
@@ -43,14 +48,17 @@ export const WriterInfo = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const StyledRoot = styled.div`
+export const PasswordModal = styled.div`
   width: 25rem;
   height: 17rem;
   background-color: skyblue;
   position: absolute;
   left: 50%;
   top: 50%;
+  position: fixed;
   transform: translate(-50%, -50%);
 `;
 
 export const ButtonContainer = styled.div``;
+
+export const LetterText = styled.div``;
