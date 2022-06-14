@@ -1,17 +1,31 @@
+import axios from "axios";
 import React, { useRef } from "react";
 import { StyledRoot, WritingForm, SubmitButton, UploadButton } from "./style";
 
 function Write() {
-  const handleFile = (e) => {
-    console.log(e.target.files);
+  const handleFile = async (e) => {
+    const fileList = e.target.files;
+
+    const formData = new FormData();
+    Array.from(fileList).forEach((file) => {
+      formData.append("image", file);
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    axios.post("", formData, data);
   };
 
   //이미지 업로드 인풋 버튼 접근.
   const imageInput = useRef();
-  //이미지 업로드 버튼 연결.
-  const onClickImageUpload = () => {
-    imageInput.current.click();
-  };
+
   return (
     <StyledRoot>
       <h1>비밀 편지를 써보세요 📮</h1>
@@ -46,7 +60,14 @@ function Write() {
         </div>
         <div>
           <label htmlFor="image">이미지</label>
-          <UploadButton onClick={onClickImageUpload}>
+          <UploadButton
+            htmlFor="image"
+            onClick={(e) => {
+              //preventDefault를 해주는 이유는 뭘까?
+              e.preventDefault();
+              imageInput.current.click();
+            }}
+          >
             이미지 업로드 (jpg, jpeg, png)
           </UploadButton>
           <input
@@ -56,9 +77,12 @@ function Write() {
             multiple
             onChange={handleFile}
             ref={imageInput}
+            style={{ display: "none" }}
           ></input>
         </div>
-        <SubmitButton type="submit">비밀편지 보내기</SubmitButton>
+        <SubmitButton type="submit" onSubmit={handleSubmit}>
+          비밀편지 보내기
+        </SubmitButton>
       </WritingForm>
     </StyledRoot>
   );

@@ -18,11 +18,7 @@ export const Cards = styled.section`
     background-color: rgb(252, 251, 234);
     padding: 1.5rem;
     position: relative;
-
-    //초기 letterText 안보이게
-    /* div {
-      display: ${(props) => (props.isLocked ? null : "none")};
-    } */
+    cursor: pointer;
   }
 
   img {

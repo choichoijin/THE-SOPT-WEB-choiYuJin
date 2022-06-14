@@ -14,10 +14,6 @@ export const WritingForm = styled.form`
   height: 50rem;
   background-color: beige;
   margin: 20px auto;
-
-  input[type="file"] {
-    display: none;
-  }
 `;
 
 export const UploadButton = styled.button`
