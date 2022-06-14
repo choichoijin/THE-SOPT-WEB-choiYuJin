@@ -29,6 +29,8 @@ export const Cards = styled.section`
   }
 `;
 
+export const EditButton = styled.button``;
+
 // export const CardCover = styled.article`
 //   height: 18rem;
 //   width: 24rem;

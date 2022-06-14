@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   Cards,
   WriterInfo,
+  EditButton,
   PasswordModal,
   ButtonContainer,
   LetterText,
 } from "./style";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function LetterCards() {
   const [letterData, setLetterData] = useState([]);
@@ -38,30 +40,30 @@ function LetterCards() {
   const letterList = letterData.map((letter) => (
     <li key={letter._id} onClick={() => showModal(letter)}>
       {unlockList.indexOf(letter._id) === -1 ? null : (
-        <LetterText>
-          <WriterInfo>
-            <span>From. {letter.name}</span>
-            {letter.images.map((url) => (
-              <img key={url} alt="이미지" src={url} />
-            ))}
-          </WriterInfo>
-          <p>{letter.content}</p>
-        </LetterText>
+        <>
+          <LetterText>
+            <WriterInfo>
+              <span>From. {letter.name}</span>
+              {letter.images.map((url) => (
+                <img key={url} alt="이미지" src={url} />
+              ))}
+            </WriterInfo>
+            <p>{letter.content}</p>
+          </LetterText>
+          <Link to="/edit">
+            <EditButton letter={letter}>내맘대로 수정하기</EditButton>
+          </Link>
+        </>
       )}
     </li>
   ));
 
-  //hint, id, password를 한번에 가져올 수 있을까?
-  const [letterHint, setLetterHint] = useState();
-  const [letterPassword, setLetterPassword] = useState();
-  const [letterId, setLetterId] = useState();
+  const [selectedLetter, setSelectedLetter] = useState();
 
   //선택된 편지 정보 저장해서 모달에 보여주기 & 아이디 저장.
   function showModal(letter) {
-    setLetterHint(letter.hint);
-    setLetterPassword(letter.password);
-    setLetterId(letter._id);
     setModalOpen(true);
+    setSelectedLetter(letter);
   }
 
   const onChange = (e) => {
@@ -70,9 +72,9 @@ function LetterCards() {
 
   function checkPassword() {
     //비밀번호 맞음 -> 내용 보여줌.
-    if (letterPassword === typedPassword) {
+    if (selectedLetter.password === typedPassword) {
       setModalOpen(false);
-      setUnlockList((unlockList) => [...unlockList, letterId]);
+      setUnlockList((unlockList) => [...unlockList, selectedLetter._id]);
     } else {
       //틀림 -> 틀렸음.
       alert("비밀번호를 정확하게 입력해주세요!");
@@ -88,7 +90,7 @@ function LetterCards() {
         <PasswordModal>
           <h1>비밀번호를 입력하세요.</h1>
           <h2>
-            힌트: {letterHint} 비번: {letterPassword}
+            힌트: {selectedLetter.hint} 비번: {selectedLetter.password}
           </h2>
           <input placeholder="비밀번호" onChange={onChange}></input>
           <ButtonContainer>

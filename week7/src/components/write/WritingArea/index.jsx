@@ -1,4 +1,4 @@
-import axios from "axios";
+//import axios from "axios";
 import React, { useRef } from "react";
 import { StyledRoot, WritingForm, SubmitButton, UploadButton } from "./style";
 
@@ -12,16 +12,16 @@ function Write() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    const data = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-    axios.post("", formData, data);
-  };
+  //   const data = {
+  //     headers: {
+  //       "content-type": "multipart/form-data",
+  //     },
+  //   };
+  //   axios.post("", formData, data);
+  // };
 
   //이미지 업로드 인풋 버튼 접근.
   const imageInput = useRef();
@@ -80,9 +80,7 @@ function Write() {
             style={{ display: "none" }}
           ></input>
         </div>
-        <SubmitButton type="submit" onSubmit={handleSubmit}>
-          비밀편지 보내기
-        </SubmitButton>
+        <SubmitButton type="submit">비밀편지 보내기</SubmitButton>
       </WritingForm>
     </StyledRoot>
   );
