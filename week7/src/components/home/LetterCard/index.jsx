@@ -8,7 +8,7 @@ import {
   LetterText,
 } from "./style";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 function LetterCards() {
   const [letterData, setLetterData] = useState([]);
@@ -20,6 +20,7 @@ function LetterCards() {
 
   //비밀번호 맞춰진 편지 list.
   const [unlockList, setUnlockList] = useState([]);
+  const [selectedLetter, setSelectedLetter] = useState();
 
   //서버에서 데이터 받아 letterData에 저장.
   useEffect(() => {
@@ -50,15 +51,16 @@ function LetterCards() {
             </WriterInfo>
             <p>{letter.content}</p>
           </LetterText>
-          <Link to="/edit">
-            <EditButton letter={letter}>내맘대로 수정하기</EditButton>
-          </Link>
+          <EditButton onClick={handleClick}>내맘대로 수정하기</EditButton>
         </>
       )}
     </li>
   ));
 
-  const [selectedLetter, setSelectedLetter] = useState();
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate("/edit", { state: selectedLetter });
+  }
 
   //선택된 편지 정보 저장해서 모달에 보여주기 & 아이디 저장.
   function showModal(letter) {
