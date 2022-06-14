@@ -41,7 +41,9 @@ function LetterCards() {
         <LetterText>
           <WriterInfo>
             <span>From. {letter.name}</span>
-            <img alt="프로필 이미지" src={letter.images[0]} />
+            {letter.images.map((url) => (
+              <img key={url} alt="이미지" src={url} />
+            ))}
           </WriterInfo>
           <p>{letter.content}</p>
         </LetterText>
