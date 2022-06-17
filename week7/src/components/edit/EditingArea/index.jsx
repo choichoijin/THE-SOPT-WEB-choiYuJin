@@ -11,7 +11,7 @@ function Edit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/");
+    navigate("/", { replace: true });
     await axios
       .patch(
         `https://sopt-letter.herokuapp.com/letter/${letter._id}`,
