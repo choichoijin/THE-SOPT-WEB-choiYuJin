@@ -40,7 +40,9 @@ function LetterCards() {
   //편지 카드 보여주기.
   const letterList = letterData.map((letter) => (
     <li key={letter._id} onClick={() => showModal(letter)}>
-      {unlockList.indexOf(letter._id) === -1 ? null : (
+      {unlockList.indexOf(letter._id) === -1 ? (
+        "🔐"
+      ) : (
         <>
           <LetterText>
             <WriterInfo>
@@ -90,10 +92,8 @@ function LetterCards() {
       </Cards>
       {modalOpen ? (
         <PasswordModal>
-          <h1>비밀번호를 입력하세요.</h1>
-          <h2>
-            힌트: {selectedLetter.hint} 비번: {selectedLetter.password}
-          </h2>
+          <h1>비밀번호를 입력해주세요.</h1>
+          <h2>힌트: {selectedLetter.hint}</h2>
           <input placeholder="비밀번호" onChange={onChange}></input>
           <ButtonContainer>
             <button onClick={checkPassword}>OK</button>
