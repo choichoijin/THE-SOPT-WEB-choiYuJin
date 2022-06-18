@@ -30,6 +30,8 @@ export const WritingForm = styled.form`
 
   div > input {
     font-family: "GangwonEdu_OTFBoldA";
+    font-size: 20px;
+    padding-left: 10px;
     width: 350px;
     height: 30px;
     position: absolute;
