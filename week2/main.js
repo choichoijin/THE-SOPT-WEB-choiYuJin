@@ -31,30 +31,29 @@ const quizList = [
   },
 ];
 
+const modal = $("div.modal");
+const modalBody = $("p.modal__body");
+
 //게임 설정값 초기화
-function initGame({score, answer, image}){
+function initGame({ score, image }) {
   currentStep = 0;
   score.innerText = 0;
   image.src = quizList[currentStep].src;
-};
+  loadModal();
+}
 
 //Modal 보여주기
 function showModal(modalContent, keepOpen) {
-  const modal = $('div.modal');
-  const modalBody = $('p.modal__body');
   modalBody.innerHTML = modalContent;
-
-  modal.classList.remove('hide');
+  modal.classList.remove("hide");
 
   //마지막 단계
   if (keepOpen) return;
 
   //Modal 500ms 뒤 사라지게 하기
   setTimeout(() => {
-    modal.classList.add('hide');
+    modal.classList.add("hide");
   }, 500);
-
-  
 }
 
 //다음 단계로
@@ -66,36 +65,48 @@ function goNextStep(score, image) {
 
   //마지막 단계라면
   if (currentStep === quizList.length) {
-    showModal(`
-    <a href="/">메인 화면으로</a>`, true);
+    showModal(
+      `
+    <a href="/">메인 화면으로</a>`,
+      true
+    );
     return;
   }
 
   //img 다음으로
   image.src = quizList[currentStep].src;
-
-  
 }
 
 //퀴즈 진행 로직
-function attachEvent({score, answer, image}) {
-  answer.addEventListener('click', (e) => {
+function attachEvent({ score, answer, image }) {
+  answer.addEventListener("click", (e) => {
     if (e.target instanceof HTMLLIElement) {
       const currentAnswer = e.target.innerText;
       const realAnswer = quizList[currentStep].answer;
       if (currentAnswer === realAnswer) {
         goNextStep(score, image);
-      }
-      else {
-        showModal('틀렷엉')
+        loadModal();
+      } else {
+        showModal("틀렷엉");
       }
     }
   });
   //다시하기 버튼 기능.
-  const buttonRestart = $('.buttonList__restart')
-  buttonRestart.addEventListener('click', (e) => {
-  initGame({score, answer, image})
-  })
+  const buttonRestart = $(".buttonList__restart");
+  buttonRestart.addEventListener("click", (e) => {
+    initGame({ score, answer, image });
+  });
+
+  //이미지 로딩 완료.
+  image.addEventListener("load", () => {
+    modal.classList.add("hide");
+  });
+}
+
+//이미지 로딩 모달.
+function loadModal() {
+  modalBody.innerHTML = "이미지 로딩중";
+  modal.classList.remove("hide");
 }
 
 function gameManager(gameInfo) {
@@ -106,8 +117,8 @@ function gameManager(gameInfo) {
 //onload 함수 : 웹브라우저 내 모든 요소 준비되어야 실행.
 window.onload = () => {
   gameManager({
-    score: $('.scoreBoard__score'),
-    answer: $('.answer__list'),
-    image: $('.imageBoard > img'),
+    score: $(".scoreBoard__score"),
+    answer: $(".answer__list"),
+    image: $(".imageBoard > img"),
   });
-}
+};
