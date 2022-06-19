@@ -71,6 +71,9 @@ function goNextStep(score, image) {
     <a href="/">메인 화면으로</a>`,
       true
     );
+    modal.addEventListener("click", () => {
+      modal.classList.add("hide");
+    });
     return;
   }
 
