@@ -3,6 +3,7 @@ import pic2 from "./assets/sibelhomme.jpeg";
 import pic3 from "./assets/moncher.jpeg";
 import pic4 from "./assets/enfant.jpeg";
 import pic5 from "./assets/monami.jpeg";
+import "animate.css";
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -81,25 +82,31 @@ function goNextStep(score, image) {
 function attachEvent({ score, answer, image }) {
   answer.addEventListener("click", (e) => {
     if (e.target instanceof HTMLLIElement) {
+      loadModal();
       const currentAnswer = e.target.innerText;
       const realAnswer = quizList[currentStep].answer;
       if (currentAnswer === realAnswer) {
         goNextStep(score, image);
-        loadModal();
+        //점수창 애니메이션.
+        $("section.scoreBoard").classList.add("animate__heartBeat");
+        setTimeout(() => {
+          $("section.scoreBoard").classList.remove("animate__heartBeat");
+        }, 2000);
       } else {
         showModal("틀렷엉");
       }
     }
   });
-  //다시하기 버튼 기능.
-  const buttonRestart = $(".buttonList__restart");
-  buttonRestart.addEventListener("click", (e) => {
-    initGame({ score, answer, image });
-  });
 
   //이미지 로딩 완료.
   image.addEventListener("load", () => {
     modal.classList.add("hide");
+  });
+
+  //다시하기 버튼 기능.
+  const buttonRestart = $(".buttonList__restart");
+  buttonRestart.addEventListener("click", (e) => {
+    initGame({ score, answer, image });
   });
 }
 
