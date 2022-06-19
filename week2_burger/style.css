@@ -12,7 +12,7 @@ main {
 header {
   width: 100%;
   height: 50px;
-  background-color: #FDC6B8;
+  background-color: #fdc6b8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,10 +23,28 @@ header > h1 {
   letter-spacing: 8px;
 }
 
+.header__sideBar {
+  display: none;
+  position: absolute;
+  left: 20px;
+}
+
+.header__sideBar > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  font-size: 13px;
+  height: 20px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 5px 0;
+}
+
 aside.sideBar {
   flex: 0.5;
   height: 110px;
-  background-color: #E3BAA6;
+  background-color: #e3baa6;
   margin: 0 30px;
   border-radius: 8px;
 }
@@ -67,14 +85,19 @@ section.burger {
 
 article.burger__card {
   display: flex;
-  background-color: #F6E1B6; 
-  border: 1px solid #D4BC9D;
-  box-shadow: 5px 5px 3px #D4BC9D;
+  background-color: #f6e1b6;
+  border: 1px solid #d4bc9d;
+  box-shadow: 5px 5px 3px #d4bc9d;
   border-radius: 8px;
   width: 48%;
   height: 150px;
   justify-content: center;
   align-items: center;
+}
+
+article.burger__card:hover {
+  background-color: #d4bc9d;
+  cursor: pointer;
 }
 
 article.burger__card > img {
@@ -87,9 +110,7 @@ div.burger__content {
   width: 180px;
 }
 
-
 aside.cart {
-  flex: 1;
   height: 100%;
   width: 300px;
   background-color: bisque;
@@ -97,6 +118,11 @@ aside.cart {
   border-radius: 8px;
   position: sticky;
   top: 50px;
+}
+
+div.cart__amount > h2,
+h4 {
+  margin: 30px 0;
 }
 
 .cart__list__list {
@@ -107,7 +133,7 @@ aside.cart {
 }
 
 .cart__list__name {
-  flex: 50%
+  flex: 50%;
 }
 
 .cart__list__number {
@@ -117,7 +143,7 @@ aside.cart {
 }
 
 .cart__list__price {
-  flex: 25%
+  flex: 25%;
 }
 
 .cart__list__list > button {
@@ -127,7 +153,7 @@ aside.cart {
   outline: 0;
   border-radius: 50px;
   color: white;
-  background-color:#e43656;
+  background-color: #e43656;
 }
 
 div.cart__content {
@@ -142,7 +168,8 @@ div.cart__amount {
   height: 120px;
 }
 
-div.cart__amount > h2, h4 {
+div.cart__amount > h2,
+h4 {
   margin: 30px 0;
 }
 
@@ -156,7 +183,7 @@ div.cart__buttonContainer > button {
   width: 60px;
   height: 30px;
   border-radius: 15px;
-  background-color: #E3BAA6;
+  background-color: #e3baa6;
   color: white;
   border: none;
   margin: 8px 5px;
@@ -180,36 +207,54 @@ div.cart__buttonContainer {
   width: 300px;
   height: 110px;
   border-radius: 30px;
-  background-color:beige;
+  background-color: beige;
 }
 
-.modal__content > p{
+.modal__content > p {
   font-size: 17px;
   font-weight: 700;
   margin-top: 20px;
   text-align: center;
 }
 
-.modal__button{
+.modal__button {
   text-align: center;
   margin-top: 20px;
 }
 
-.modal__button__yes{
+.modal__button__yes {
   background-color: rgb(58, 190, 238);
   text-decoration: none;
 }
 
-.modal__button__no{
+.modal__button__no {
   border: 0;
   outline: 0;
-  background-color:#e43656;
+  background-color: #e43656;
 }
 
-.modal__button__yes, 
-.modal__button__no{
+.modal__button__yes,
+.modal__button__no {
   margin: 0 15px;
   padding: 7px 10px;
   border-radius: 30px;
   color: white;
+}
+
+@media (max-width: 1200px) {
+  aside.sideBar {
+    display: none;
+  }
+  .header__sideBar {
+    display: block;
+  }
+}
+
+@media (max-width: 950px) {
+  section.burger {
+    width: 80%;
+  }
+  article.burger__card {
+    width: 96%;
+  }
 }
