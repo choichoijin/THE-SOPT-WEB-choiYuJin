@@ -11,13 +11,13 @@ function Edit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/", { replace: true });
     await axios
       .patch(
         `https://sopt-letter.herokuapp.com/letter/${letter._id}`,
         newLetter
       )
       .catch((error) => console.log(error));
+    navigate("/", { replace: true });
   };
 
   const [newLetter, setNewLetter] = useState({

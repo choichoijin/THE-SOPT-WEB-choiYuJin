@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
 import { StyledRoot, WritingForm, SubmitButton, UploadButton } from "./style";
+import { useNavigate } from "react-router";
 
 function Write() {
   const formData = new FormData();
@@ -21,29 +22,14 @@ function Write() {
     });
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //formData.append("data", JSON.stringify(newLetter));
-    // formData.append(, info.value);
 
     Object.entries(newLetter).map((info) => {
-      return formData.append(info[0], JSON.stringify(info[1]));
+      return formData.append(info[0], info[1]);
     });
-
-    // const newLetterArr = Object.entries(newLetter).map((info) => {
-    //   return newLetterArr;
-    // });
-    // console.log(newLetterArr);
-
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-
-    //navigate("/", { replace: true });
 
     await axios
       .post("https://sopt-letter.herokuapp.com/letter", formData, {
@@ -51,10 +37,9 @@ function Write() {
           "Content-Type": `multipart/form-data`,
         },
       })
-      .then((response) => {
-        console.log(response);
-      })
       .catch((error) => console.log(error));
+
+    navigate("/", { replace: true });
   };
 
   //이미지 업로드 인풋 버튼 접근.
@@ -67,7 +52,7 @@ function Write() {
         <div>
           <label htmlFor="title">이름</label>
           <input
-            name="title"
+            name="name"
             type="text"
             placeholder="이름이 뭐에요?"
             onChange={onChange}
