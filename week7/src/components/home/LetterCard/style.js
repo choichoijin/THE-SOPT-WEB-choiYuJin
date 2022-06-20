@@ -48,8 +48,6 @@ export const WriterInfo = styled.div`
 export const PasswordModal = styled.div`
   font-family: "SUIT-Medium";
   width: 400px;
-  height: 220px;
-
   color: white;
   position: absolute;
   left: 50%;
@@ -92,6 +90,15 @@ export const PasswordModal = styled.div`
     :hover {
       background-color: rgb(186, 184, 184);
     }
+  }
+
+  //비밀번호가 틀렸을 때
+  p {
+    background-color: rgb(242, 118, 118);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
