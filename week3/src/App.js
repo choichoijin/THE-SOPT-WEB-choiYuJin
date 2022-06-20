@@ -29,17 +29,14 @@ function App() {
         setFighters([...winners, fighters[num]]);
         setWinners([]);
         setGameNum((prevState) => prevState / 2);
-        console.log(fighters);
         // 최종 우승자 나옴.
       } else if (fighters.length === 2 && winners.length === 0) {
         setGameEnd(true);
         setFighters([fighters[num]]);
-        console.log(fighters);
         // 경기중.
       } else {
         setWinners([...winners, fighters[num]]);
         setFighters(fighters.slice(2));
-        console.log(fighters);
       }
       setWinnerClicked(0);
     }, 1500);
@@ -150,12 +147,13 @@ const Winner = styled.img`
   margin: 0px auto;
   width: 500px;
   height: 500px;
+  position: relative;
 `;
 
 const Congrats = styled.img`
   position: absolute;
   left: 50%;
-  top: 55%;
+  top: 70%;
   transform: translate(-50%, -50%);
   width: 400px;
   height: 400px;
