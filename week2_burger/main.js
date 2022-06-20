@@ -73,9 +73,11 @@ function order({ burgerCard, cartList }) {
 
       //선택한 버거가 이미 카트에 있는지 확인.
       if (checkCart(burgerName) === false) {
+        $("aside.cart").classList.remove("shaking");
         const burgerNameTxt = burgerName.innerText;
         const burgerPriceTxt = burgerPrice.innerText;
         addOrder(burgerNameTxt, burgerPriceTxt, cartList);
+        $("aside.cart").classList.add("shaking");
       }
       calcTotalAmount(cartList);
     }
@@ -131,6 +133,7 @@ function addOrder(burgerNameTxt, burgerPriceTxt, cartList, burgerQty) {
   button.onclick = () => {
     burgerLi.remove();
     localStorage.removeItem(burgerLi.children[0].innerText);
+    calcTotalAmount(cartList);
   };
 
   const addList = [span, input, div, button];
