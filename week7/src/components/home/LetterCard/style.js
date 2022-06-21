@@ -30,15 +30,6 @@ export const Cards = styled.section`
   }
 `;
 
-// export const CardCover = styled.article`
-//   height: 18rem;
-//   width: 24rem;
-//   //background-color: blue;
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-// `;
-
 export const WriterInfo = styled.div`
   display: flex;
   align-items: center;
@@ -106,8 +97,6 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-export const LetterText = styled.div``;
 
 export const EditButton = styled.button`
   height: 35px;
