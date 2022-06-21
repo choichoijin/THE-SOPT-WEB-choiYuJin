@@ -30,15 +30,6 @@ export const Cards = styled.section`
   }
 `;
 
-// export const CardCover = styled.article`
-//   height: 18rem;
-//   width: 24rem;
-//   //background-color: blue;
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-// `;
-
 export const WriterInfo = styled.div`
   display: flex;
   align-items: center;
@@ -48,8 +39,6 @@ export const WriterInfo = styled.div`
 export const PasswordModal = styled.div`
   font-family: "SUIT-Medium";
   width: 400px;
-  height: 220px;
-
   color: white;
   position: absolute;
   left: 50%;
@@ -93,14 +82,21 @@ export const PasswordModal = styled.div`
       background-color: rgb(186, 184, 184);
     }
   }
+
+  //비밀번호가 틀렸을 때
+  p {
+    background-color: rgb(242, 118, 118);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-export const LetterText = styled.div``;
 
 export const EditButton = styled.button`
   height: 35px;

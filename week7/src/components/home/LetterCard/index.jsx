@@ -5,14 +5,12 @@ import {
   EditButton,
   PasswordModal,
   ButtonContainer,
-  LetterText,
 } from "./style";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
 function LetterCards() {
   const [letterData, setLetterData] = useState([]);
-
   const [typedPassword, setTypedPassword] = useState();
 
   //modalOpen이 true면 모달을 열어라.
@@ -44,7 +42,7 @@ function LetterCards() {
         "🔐"
       ) : (
         <>
-          <LetterText>
+          <div>
             <WriterInfo>
               <span>From. {letter.name}</span>
               {letter.images.map((url) => (
@@ -52,7 +50,7 @@ function LetterCards() {
               ))}
             </WriterInfo>
             <p>{letter.content}</p>
-          </LetterText>
+          </div>
           <EditButton onClick={handleClick}>내맘대로 수정하기</EditButton>
         </>
       )}
@@ -64,8 +62,9 @@ function LetterCards() {
     navigate("/edit", { state: selectedLetter });
   }
 
-  //선택된 편지 정보 저장해서 모달에 보여주기 & 아이디 저장.
+  //선택된 편지 정보 저장 & 모달에 보여주기
   function showModal(letter) {
+    setWrongPassword(false);
     setModalOpen(true);
     setSelectedLetter(letter);
   }
@@ -74,14 +73,16 @@ function LetterCards() {
     setTypedPassword(e.target.value);
   };
 
+  const [wrongPassword, setWrongPassword] = useState(false);
   function checkPassword() {
     //비밀번호 맞음 -> 내용 보여줌.
     if (selectedLetter.password === typedPassword) {
+      setWrongPassword(false);
       setModalOpen(false);
       setUnlockList((unlockList) => [...unlockList, selectedLetter._id]);
     } else {
       //틀림 -> 틀렸음.
-      alert("비밀번호를 정확하게 입력해주세요!");
+      setWrongPassword(true);
     }
   }
 
@@ -95,6 +96,7 @@ function LetterCards() {
           <h1>비밀번호를 입력해주세요.</h1>
           <h2>힌트: {selectedLetter.hint}</h2>
           <input placeholder="비밀번호" onChange={onChange}></input>
+          {wrongPassword ? <p>비밀번호가 틀렸어요!</p> : null}
           <ButtonContainer>
             <button onClick={checkPassword}>OK</button>
             <button onClick={() => setModalOpen(false)}>Cancel</button>
