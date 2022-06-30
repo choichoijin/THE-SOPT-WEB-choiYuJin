@@ -5,26 +5,23 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 function Edit() {
-  const letter = useLocation().state;
+  const { _id, name, content, password, hint } = useLocation().state;
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .patch(
-        `https://sopt-letter.herokuapp.com/letter/${letter._id}`,
-        newLetter
-      )
+      .patch(`https://sopt-letter.herokuapp.com/letter/${_id}`, newLetter)
       .catch((error) => console.log(error));
     navigate("/", { replace: true });
   };
 
   const [newLetter, setNewLetter] = useState({
-    name: `${letter.name}`,
-    content: `${letter.content}`,
-    password: `${letter.password}`,
-    hint: `${letter.hint}`,
+    name: `${name}`,
+    content: `${content}`,
+    password: `${password}`,
+    hint: `${hint}`,
   });
 
   const onChange = (e) => {
@@ -45,7 +42,7 @@ function Edit() {
             name="name"
             type="text"
             placeholder="이름이 뭐에요?"
-            defaultValue={letter.name}
+            defaultValue={name}
             onChange={onChange}
           ></input>
         </div>
@@ -55,7 +52,7 @@ function Edit() {
             name="content"
             type="text"
             placeholder="무슨 내용의 편지를 써볼까요?"
-            defaultValue={letter.content}
+            defaultValue={content}
             onChange={onChange}
           ></input>
         </div>
@@ -65,7 +62,7 @@ function Edit() {
             name="password"
             type="text"
             placeholder="비밀번호를 통해 편지를 잠궈보아요."
-            defaultValue={letter.password}
+            defaultValue={password}
             onChange={onChange}
           ></input>
         </div>
@@ -75,7 +72,7 @@ function Edit() {
             name="hint"
             type="text"
             placeholder="비밀번호 힌트를 써주세요."
-            defaultValue={letter.hint}
+            defaultValue={hint}
             onChange={onChange}
           ></input>
         </div>

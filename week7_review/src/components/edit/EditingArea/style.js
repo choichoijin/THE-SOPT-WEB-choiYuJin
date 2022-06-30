@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledRoot = styled.div`
+export const StyledRoot = styled.main`
   h1 {
     font-size: 2.5rem;
     font-family: "GangwonEdu_OTFBoldA";

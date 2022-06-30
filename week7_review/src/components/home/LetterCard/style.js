@@ -54,13 +54,6 @@ export const PasswordModal = styled.div`
     margin: 15px 15px;
   }
 
-  //힌트.
-  h2 {
-    font-size: 16px;
-    text-align: center;
-    margin: 10px 10px;
-  }
-
   input {
     font-family: "SUIT-Medium";
     width: 80%;
@@ -82,15 +75,21 @@ export const PasswordModal = styled.div`
       background-color: rgb(186, 184, 184);
     }
   }
+`;
 
-  //비밀번호가 틀렸을 때
-  p {
-    background-color: rgb(242, 118, 118);
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+export const Hint = styled.p`
+  font-size: 16px;
+  text-align: center;
+  margin: 10px 10px;
+`;
+
+//비밀번호가 틀렸을 때
+export const Notice = styled.p`
+  background-color: rgb(242, 118, 118);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ButtonContainer = styled.div`

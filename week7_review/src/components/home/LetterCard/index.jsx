@@ -4,6 +4,8 @@ import {
   WriterInfo,
   EditButton,
   PasswordModal,
+  Hint,
+  Notice,
   ButtonContainer,
 } from "./style";
 import axios from "axios";
@@ -41,7 +43,7 @@ function LetterCards() {
       {unlockList.indexOf(letter._id) === -1 ? (
         "🔐"
       ) : (
-        <>
+        <article>
           <div>
             <WriterInfo>
               <span>From. {letter.name}</span>
@@ -51,16 +53,16 @@ function LetterCards() {
             </WriterInfo>
             <p>{letter.content}</p>
           </div>
-          <EditButton onClick={() => handleClick(letter)}>
+          <EditButton onClick={() => handleEditBtn(letter)}>
             내맘대로 수정하기
           </EditButton>
-        </>
+        </article>
       )}
     </li>
   ));
 
   const navigate = useNavigate();
-  function handleClick(letter) {
+  function handleEditBtn(letter) {
     navigate("/edit", { state: letter });
   }
 
@@ -71,7 +73,7 @@ function LetterCards() {
     setSelectedLetter(letter);
   }
 
-  const onChange = (e) => {
+  const onInputChange = (e) => {
     setTypedPassword(e.target.value);
   };
 
@@ -96,9 +98,9 @@ function LetterCards() {
       {modalOpen ? (
         <PasswordModal>
           <h1>비밀번호를 입력해주세요.</h1>
-          <h2>힌트: {selectedLetter.hint}</h2>
-          <input placeholder="비밀번호" onChange={onChange}></input>
-          {wrongPassword ? <p>비밀번호가 틀렸어요!</p> : null}
+          <Hint>힌트: {selectedLetter.hint}</Hint>
+          <input placeholder="비밀번호" onChange={onInputChange}></input>
+          {wrongPassword && <Notice>비밀번호가 틀렸어요!</Notice>}
           <ButtonContainer>
             <button onClick={checkPassword}>OK</button>
             <button onClick={() => setModalOpen(false)}>Cancel</button>
