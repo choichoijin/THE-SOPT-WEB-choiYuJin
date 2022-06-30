@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledRoot = styled.main`
-  h1 {
+  header {
     font-size: 2.5rem;
     font-family: "GangwonEdu_OTFBoldA";
     text-align: center;
