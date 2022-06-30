@@ -9,7 +9,6 @@ export const StyledRoot = styled.div`
   width: 100%;
   height: 7.5rem;
   position: relative;
-  font-family: "GangwonEdu_OTFBoldA";
 
   h1 {
     font-size: 3rem;
@@ -17,7 +16,6 @@ export const StyledRoot = styled.div`
 
   button {
     background-color: rgb(255, 249, 76);
-    font-family: "GangwonEdu_OTFBoldA";
     height: 2.5rem;
     width: 8rem;
     font-size: 1rem;

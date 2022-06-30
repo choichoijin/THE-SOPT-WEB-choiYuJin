@@ -99,7 +99,6 @@ export const ButtonContainer = styled.div`
 
 export const EditButton = styled.button`
   height: 35px;
-  font-family: "GangwonEdu_OTFBoldA";
   font-size: 18px;
   border-style: none;
   border-radius: 15px;

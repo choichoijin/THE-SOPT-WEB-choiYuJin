@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
-function Edit() {
+function EditingArea() {
   const { _id, name, content, password, hint } = useLocation().state;
 
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function Edit() {
 
   return (
     <StyledRoot>
-      <h1>😼 몰래 수정해보아요 😼</h1>
+      <header>😼 몰래 수정해보아요 😼</header>
       <WritingForm onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">이름</label>
@@ -82,4 +82,4 @@ function Edit() {
   );
 }
 
-export default Edit;
+export default EditingArea;

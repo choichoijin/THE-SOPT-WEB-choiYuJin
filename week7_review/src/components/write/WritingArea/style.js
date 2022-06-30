@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const StyledRoot = styled.div`
   h1 {
     font-size: 2.5rem;
-    font-family: "GangwonEdu_OTFBoldA";
     text-align: center;
     margin: 30px;
   }
@@ -14,7 +13,6 @@ export const WritingForm = styled.form`
   height: 100%;
   border-radius: 15px;
   margin: 20px auto;
-  font-family: "GangwonEdu_OTFBoldA";
   position: relative;
   background-color: beige;
 
@@ -29,7 +27,6 @@ export const WritingForm = styled.form`
   }
 
   div > input {
-    font-family: "GangwonEdu_OTFBoldA";
     font-size: 20px;
     padding-left: 10px;
     width: 350px;
@@ -43,7 +40,6 @@ export const WritingForm = styled.form`
 
 export const UploadButton = styled.button`
   height: 26px;
-  font-family: "GangwonEdu_OTFBoldA";
   font-size: 18px;
   border-style: none;
   border-radius: 15px;
@@ -58,7 +54,6 @@ export const UploadButton = styled.button`
 export const SubmitButton = styled.button`
   height: 35px;
   width: 90%;
-  font-family: "GangwonEdu_OTFBoldA";
   font-size: 30px;
   border-style: none;
   border-radius: 8px;

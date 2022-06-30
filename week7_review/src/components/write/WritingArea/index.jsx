@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { StyledRoot, WritingForm, SubmitButton, UploadButton } from "./style";
 import { useNavigate } from "react-router";
 
-function Write() {
+function WritingArea() {
   const formData = new FormData();
   const handleFile = async (e) => {
     const fileList = e.target.files;
@@ -112,4 +112,4 @@ function Write() {
   );
 }
 
-export default Write;
+export default WritingArea;
