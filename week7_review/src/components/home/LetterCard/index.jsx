@@ -8,7 +8,7 @@ import {
   Notice,
   ButtonContainer,
 } from "./style";
-import axios from "axios";
+import { api } from "api.js";
 import { useNavigate } from "react-router";
 
 function LetterCards() {
@@ -26,9 +26,7 @@ function LetterCards() {
   useEffect(() => {
     const getLetterData = async () => {
       try {
-        const response = await axios.get(
-          "https://sopt-letter.herokuapp.com/letter"
-        );
+        const response = await api.get("/letter");
         setLetterData(response.data.data);
       } catch (e) {
         console.error(e);

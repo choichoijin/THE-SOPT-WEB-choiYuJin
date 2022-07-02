@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyledRoot, WritingForm, SubmitButton } from "./style";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+import { api } from "api.js";
 import { useNavigate } from "react-router";
 
 function EditingArea() {
@@ -11,8 +11,8 @@ function EditingArea() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .patch(`https://sopt-letter.herokuapp.com/letter/${_id}`, newLetter)
+    await api
+      .patch(`/letter/${_id}`, newLetter)
       .catch((error) => console.log(error));
     navigate("/", { replace: true });
   };

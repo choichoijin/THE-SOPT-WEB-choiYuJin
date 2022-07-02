@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "api.js";
 import React, { useState, useRef } from "react";
 import { StyledRoot, WritingForm, SubmitButton, UploadButton } from "./style";
 import { useNavigate } from "react-router";
@@ -30,8 +30,8 @@ function WritingArea() {
       return formData.append(info[0], info[1]);
     });
 
-    await axios
-      .post("https://sopt-letter.herokuapp.com/letter", formData, {
+    await api
+      .post("/letter", formData, {
         headers: {
           "Content-Type": `multipart/form-data`,
         },
